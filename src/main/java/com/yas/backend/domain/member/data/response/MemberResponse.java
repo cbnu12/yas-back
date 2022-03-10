@@ -1,15 +1,15 @@
-package com.yas.backend.domain.member;
+package com.yas.backend.domain.member.data.response;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
-@Getter
 @Builder
-public class Member {
+@Getter
+@Setter
+public class MemberResponse {
     private String email;
-    private String password;
     private String nickname;
     private Integer birthYear;
-    private Boolean showBirthYear;
     private Integer careerYear;
 }

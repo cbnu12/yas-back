@@ -1,5 +1,9 @@
-package com.yas.backend.domain.member;
+package com.yas.backend.domain.member.data.mapper;
 
+import com.yas.backend.domain.member.data.Member;
+import com.yas.backend.domain.member.data.entity.MemberEntity;
+import com.yas.backend.domain.member.data.response.MemberResponse;
+import com.yas.backend.domain.member.data.dto.MemberDto;
 import org.springframework.stereotype.Component;
 
 @Component

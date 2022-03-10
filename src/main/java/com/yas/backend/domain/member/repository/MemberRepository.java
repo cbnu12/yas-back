@@ -1,5 +1,6 @@
-package com.yas.backend.domain.member;
+package com.yas.backend.domain.member.repository;
 
+import com.yas.backend.domain.member.data.entity.MemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberRepository extends JpaRepository<MemberEntity, String> {

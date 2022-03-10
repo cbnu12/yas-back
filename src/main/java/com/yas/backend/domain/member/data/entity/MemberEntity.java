@@ -1,4 +1,4 @@
-package com.yas.backend.domain.member;
+package com.yas.backend.domain.member.data.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

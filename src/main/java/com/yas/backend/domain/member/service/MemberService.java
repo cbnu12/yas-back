@@ -1,5 +1,10 @@
-package com.yas.backend.domain.member;
+package com.yas.backend.domain.member.service;
 
+import com.yas.backend.domain.member.data.Member;
+import com.yas.backend.domain.member.data.dto.MemberDto;
+import com.yas.backend.domain.member.data.entity.MemberEntity;
+import com.yas.backend.domain.member.data.mapper.MemberMapper;
+import com.yas.backend.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
