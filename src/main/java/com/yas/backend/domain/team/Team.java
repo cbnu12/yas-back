@@ -17,4 +17,5 @@ public class Team {
     private List<LocalDateTime> regularMeetingSchedules;
     private List<String> joiningCondition;
     private Long ownerId;
+    private List<Long> memberIds;
 }
