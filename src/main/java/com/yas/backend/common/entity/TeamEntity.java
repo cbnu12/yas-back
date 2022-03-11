@@ -1,7 +1,6 @@
-package com.yas.backend.domain.team.entity;
+package com.yas.backend.common.entity;
 
 import com.yas.backend.common.enums.MeetingMethod;
-import com.yas.backend.domain.member.data.entity.MemberEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,20 +29,18 @@ public class TeamEntity {
     @OneToOne
     private MemberEntity owner;
 
-    @ManyToMany
-    @JoinTable(name = "team_member", joinColumns = @JoinColumn(name="team_id"), inverseJoinColumns = @JoinColumn(name="member_id"))
-    private List<MemberEntity> members;
+    @OneToMany(mappedBy = "team")
+    private List<JoinEntity> joins;
 
     @OneToMany
-    @JoinTable(name = "team_hashtag", joinColumns = @JoinColumn(name="team_id"), inverseJoinColumns = @JoinColumn(name="hashtag_id"))
+    @JoinColumn(name = "hashtag_id")
     private List<HashtagEntity> hashtags;
 
     @OneToMany
-    @JoinTable(name = "team_techstack", joinColumns = @JoinColumn(name="team_id"), inverseJoinColumns = @JoinColumn(name="techstack_id"))
+    @JoinColumn(name = "techstack_id")
     private List<TechStackEntity> techStacks;
 
-    @OneToMany
-    @JoinTable(name = "team_meetingschedule", joinColumns = @JoinColumn(name="team_id"), inverseJoinColumns = @JoinColumn(name="meetingschedule_id"))
+    @OneToMany(mappedBy = "team")
     private List<ScheduleEntity> schedules;
 
     @OneToMany(mappedBy = "team")

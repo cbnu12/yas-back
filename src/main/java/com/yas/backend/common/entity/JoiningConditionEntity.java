@@ -1,4 +1,4 @@
-package com.yas.backend.domain.team.entity;
+package com.yas.backend.common.entity;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;

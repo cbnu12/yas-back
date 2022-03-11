@@ -1,6 +1,6 @@
-package com.yas.backend.domain.member.data.entity;
+package com.yas.backend.common.entity;
 
-import com.yas.backend.domain.team.entity.TeamEntity;
+import com.yas.backend.common.entity.TeamEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
@@ -46,8 +46,8 @@ public class MemberEntity {
     @Column
     private LocalDateTime lastPasswordUpdateAt;
 
-    @ManyToMany(mappedBy = "members")
-    private List<TeamEntity> teams;
+    @OneToMany(mappedBy = "member")
+    private List<JoinEntity> joins;
 
     @CreatedBy
     @Column(updatable = false)
