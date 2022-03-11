@@ -9,13 +9,13 @@ public class Team {
 
     private Long id;
     private String name;
-    private Long totalMemberCount;
-    private List<String> hashtags;
-    private List<String> techStacks;
     private MeetingMethod meetingMethod;
+    private Integer totalMemberCount;
     private String description;
-    private List<LocalDateTime> regularMeetingSchedules;
-    private List<String> joiningCondition;
     private Long ownerId;
     private List<Long> memberIds;
+    private List<String> hashtags;
+    private List<String> techStacks;
+    private List<LocalDateTime> meetingSchedules;
+    private List<String> joiningCondition;
 }
