@@ -11,14 +11,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "member")
+@Table(name = "members")
 public class MemberEntity {
+
     @Id
+    private Long id;
+
+    @Column(name ="email")
     private String email;
 
     @Column(nullable = false)
@@ -28,13 +33,13 @@ public class MemberEntity {
     private String nickname;
 
     @Column
-    private int birthYear;
+    private LocalDate birth;
 
     @Column
-    private boolean showBirthYear;
+    private boolean showsBirth;
 
     @Column
-    private int careerYear;
+    private LocalDate careerStartAt;
 
     @Column
     private boolean isActive;
