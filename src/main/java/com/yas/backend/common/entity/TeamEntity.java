@@ -30,7 +30,7 @@ public class TeamEntity {
     @OneToOne
     private MemberEntity owner;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "team_member", joinColumns = @JoinColumn(name="team_id"), inverseJoinColumns = @JoinColumn(name="member_id"))
     private List<MemberEntity> members;
 
@@ -46,8 +46,7 @@ public class TeamEntity {
     @JoinTable(name = "team_meetingschedule", joinColumns = @JoinColumn(name="team_id"), inverseJoinColumns = @JoinColumn(name="meetingschedule_id"))
     private List<ScheduleEntity> schedules;
 
-    @OneToMany
-    @JoinTable(name = "team_joiningcondition", joinColumns = @JoinColumn(name="team_id"), inverseJoinColumns = @JoinColumn(name="joiningcondition_id"))
+    @OneToMany(mappedBy = "team")
     private List<JoiningConditionEntity> joiningConditions;
 
 }
