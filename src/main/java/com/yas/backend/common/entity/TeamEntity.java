@@ -1,11 +1,21 @@
 package com.yas.backend.common.entity;
 
 import com.yas.backend.common.enums.MeetingMethod;
+import lombok.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "teams")
 public class TeamEntity {
 
@@ -37,8 +47,11 @@ public class TeamEntity {
     private List<HashtagEntity> hashtags;
 
     @OneToMany
-    @JoinColumn(name = "techstack_id")
+    @JoinColumn(name = "tech_stack_id")
     private List<TechStackEntity> techStacks;
+
+    @OneToOne
+    private SchedulePolicyEntity schedulePolicy;
 
     @OneToMany(mappedBy = "team")
     private List<ScheduleEntity> schedules;
@@ -46,4 +59,17 @@ public class TeamEntity {
     @OneToMany(mappedBy = "team")
     private List<JoiningConditionEntity> joiningConditions;
 
+    @CreatedBy
+    @Column(updatable = false)
+    private String createdBy;
+
+    @CreatedDate
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+    @LastModifiedBy
+    private String updatedBy;
+
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 }

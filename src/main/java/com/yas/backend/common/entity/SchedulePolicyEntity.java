@@ -1,5 +1,6 @@
 package com.yas.backend.common.entity;
 
+import com.yas.backend.common.enums.MeetingCycle;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,15 +12,25 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
-@Table(name = "tech_stacks")
-public class TechStackEntity {
+@Table(name = "schedule_policies")
+public class SchedulePolicyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @OneToOne
+    @JoinColumn(name = "team_id")
+    private TeamEntity team;
+
+    @Column(name = "meeting_cycle")
+    private MeetingCycle meetingCycle;
+
+    @Column(name = "times")
+    private Integer times;
+
+    @Column(name = "day_of_week")
+    private Integer dayOfWeek;
 
     @CreatedBy
     @Column(updatable = false)
@@ -34,4 +45,5 @@ public class TechStackEntity {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
 }
