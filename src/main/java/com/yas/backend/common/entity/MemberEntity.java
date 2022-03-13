@@ -1,5 +1,6 @@
-package com.yas.backend.domain.member.data.entity;
+package com.yas.backend.common.entity;
 
+import com.yas.backend.common.entity.TeamEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
@@ -7,18 +8,21 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "member")
+@Table(name = "members")
 public class MemberEntity {
+
     @Id
+    private Long id;
+
+    @Column(name ="email")
     private String email;
 
     @Column(nullable = false)
@@ -28,19 +32,22 @@ public class MemberEntity {
     private String nickname;
 
     @Column
-    private int birthYear;
+    private LocalDate birth;
 
     @Column
-    private boolean showBirthYear;
+    private boolean showsBirth;
 
     @Column
-    private int careerYear;
+    private LocalDate careerStartAt;
 
     @Column
     private boolean isActive;
 
     @Column
     private LocalDateTime lastPasswordUpdateAt;
+
+    @OneToMany(mappedBy = "member")
+    private List<JoinEntity> joins;
 
     @CreatedBy
     @Column(updatable = false)

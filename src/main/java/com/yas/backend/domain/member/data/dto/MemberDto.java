@@ -8,6 +8,6 @@ import lombok.Getter;
 public class MemberDto {
     private String email;
     private String nickname;
-    private Integer birthYear;
+    private Integer years;
     private Integer careerYear;
 }

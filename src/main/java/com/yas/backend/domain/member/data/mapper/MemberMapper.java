@@ -1,10 +1,12 @@
 package com.yas.backend.domain.member.data.mapper;
 
 import com.yas.backend.domain.member.data.Member;
-import com.yas.backend.domain.member.data.entity.MemberEntity;
+import com.yas.backend.common.entity.MemberEntity;
 import com.yas.backend.domain.member.data.response.MemberResponse;
 import com.yas.backend.domain.member.data.dto.MemberDto;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 public class MemberMapper {
@@ -13,8 +15,8 @@ public class MemberMapper {
                 .email(entity.getEmail())
                 .password(entity.getPassword())
                 .nickname(entity.getNickname())
-                .birthYear(entity.getBirthYear())
-                .careerYear(entity.getCareerYear())
+                .birth(entity.getBirth())
+                .careerStartAt(entity.getCareerStartAt())
                 .build();
     }
 
@@ -22,8 +24,8 @@ public class MemberMapper {
         return MemberDto.builder()
                 .email(domain.getEmail())
                 .nickname(domain.getNickname())
-                .birthYear(domain.getBirthYear())
-                .careerYear(domain.getCareerYear())
+                .years(LocalDate.now().getYear() - domain.getBirth().getYear())
+                .careerYear(LocalDate.now().getYear() - domain.getCareerStartAt().getYear())
                 .build();
     }
 
@@ -31,7 +33,7 @@ public class MemberMapper {
         return MemberResponse.builder()
                 .email(dto.getEmail())
                 .nickname(dto.getNickname())
-                .birthYear(dto.getBirthYear())
+                .birthYear(dto.getYears())
                 .careerYear(dto.getCareerYear())
                 .build();
     }
