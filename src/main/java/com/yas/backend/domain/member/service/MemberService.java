@@ -4,6 +4,7 @@ import com.yas.backend.domain.member.data.Member;
 import com.yas.backend.domain.member.data.dto.MemberDto;
 import com.yas.backend.common.entity.MemberEntity;
 import com.yas.backend.domain.member.data.mapper.MemberMapper;
+import com.yas.backend.domain.member.data.response.MemberResponse;
 import com.yas.backend.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,9 @@ public class MemberService {
                 .toList();
 
         return members.stream().map(memberMapper::domainToDto).toList();
+    }
+
+    public MemberResponse findActiveMemberByEmail(String email) {
+        return memberMapper.dtoToResponse(memberMapper.domainToDto(memberMapper.entityToDomain(memberRepository.findByEmail(email))));
     }
 }

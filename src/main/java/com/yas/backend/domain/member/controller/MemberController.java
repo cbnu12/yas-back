@@ -2,6 +2,7 @@ package com.yas.backend.domain.member.controller;
 
 import com.yas.backend.domain.member.data.mapper.MemberMapper;
 import com.yas.backend.domain.member.data.response.MemberResponse;
+import com.yas.backend.domain.member.data.vo.MemberVo;
 import com.yas.backend.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,4 +21,10 @@ public class MemberController {
     public List<MemberResponse> findAllActiveMember() {
         return memberService.findAllActiveMember().stream().map(memberMapper::dtoToResponse).toList();
     }
+
+    @GetMapping
+    public MemberResponse findActiveMemberByEmail(MemberVo memberVo) {
+        return memberService.findActiveMemberByEmail(memberVo.getEmail());
+    }
+
 }
