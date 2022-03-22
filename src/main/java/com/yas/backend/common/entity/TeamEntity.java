@@ -37,7 +37,7 @@ public class TeamEntity {
     private String description;
 
     @OneToOne
-    private MemberEntity owner;
+    private UserEntity owner;
 
     @OneToMany(mappedBy = "team")
     private List<JoinEntity> joins;

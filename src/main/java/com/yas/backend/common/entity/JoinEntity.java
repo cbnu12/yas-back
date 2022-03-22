@@ -19,8 +19,8 @@ public class JoinEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
-    private MemberEntity member;
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "team_id")
