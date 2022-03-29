@@ -1,17 +1,17 @@
-package com.yas.backend.domain.member.data.mapper;
+package com.yas.backend.domain.user.data.mapper;
 
-import com.yas.backend.domain.member.data.Member;
-import com.yas.backend.common.entity.MemberEntity;
-import com.yas.backend.domain.member.data.response.MemberResponse;
-import com.yas.backend.domain.member.data.dto.MemberDto;
+import com.yas.backend.common.entity.UserEntity;
+import com.yas.backend.domain.user.data.User;
+import com.yas.backend.domain.user.data.response.UserResponse;
+import com.yas.backend.domain.user.data.dto.UserDto;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 @Component
-public class MemberMapper {
-    public Member entityToDomain(MemberEntity entity) {
-        return Member.builder()
+public class UserMapper {
+    public User entityToDomain(UserEntity entity) {
+        return User.builder()
                 .email(entity.getEmail())
                 .password(entity.getPassword())
                 .nickname(entity.getNickname())
@@ -20,8 +20,8 @@ public class MemberMapper {
                 .build();
     }
 
-    public MemberDto domainToDto(Member domain) {
-        return MemberDto.builder()
+    public UserDto domainToDto(User domain) {
+        return UserDto.builder()
                 .email(domain.getEmail())
                 .nickname(domain.getNickname())
                 .years(LocalDate.now().getYear() - domain.getBirth().getYear())
@@ -29,8 +29,8 @@ public class MemberMapper {
                 .build();
     }
 
-    public MemberResponse dtoToResponse(MemberDto dto) {
-        return MemberResponse.builder()
+    public UserResponse dtoToResponse(UserDto dto) {
+        return UserResponse.builder()
                 .email(dto.getEmail())
                 .nickname(dto.getNickname())
                 .birthYear(dto.getYears())

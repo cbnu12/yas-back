@@ -1,11 +1,11 @@
-package com.yas.backend.domain.member.data.dto;
+package com.yas.backend.domain.user.data.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class MemberDto {
+public class UserDto {
     private String email;
     private String nickname;
     private Integer years;
