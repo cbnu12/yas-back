@@ -35,7 +35,7 @@ public class UserService {
         try {
             UserEntity userEntity= userMapper.dtoToEntity(userDto);
         }catch (Exception e) {
-            result = e.getMessage();
+           e.printStackTrace();
         }
         return result;
     }
