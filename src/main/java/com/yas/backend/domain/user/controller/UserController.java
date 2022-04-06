@@ -30,7 +30,7 @@ public class UserController {
 
     @PostMapping("/joinUser")
     public String joinUser(UserDto userDto) {
-        return "";
+        return userService.joinUser(userDto);
     }
 
 
