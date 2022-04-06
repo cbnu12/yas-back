@@ -29,4 +29,14 @@ public class UserService {
     public UserResponse findActiveUserByEmail(String email) {
         return userMapper.dtoToResponse(userMapper.domainToDto(userMapper.entityToDomain(userRepository.findByEmail(email).orElse(null))));
     }
+    public String joinUser(UserDto userDto) {
+
+        String result="회원가입 성공";
+        try {
+            UserEntity userEntity= userMapper.dtoToEntity(userDto);
+        }catch (Exception e) {
+            result = e.getMessage();
+        }
+        return result;
+    }
 }

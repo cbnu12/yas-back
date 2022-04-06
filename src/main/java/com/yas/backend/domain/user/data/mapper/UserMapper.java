@@ -38,4 +38,19 @@ public class UserMapper {
                 .build();
     }
 
+    public UserEntity dtoToEntity(UserDto dto) {
+        return UserEntity.builder()
+                .birth(dto.getBirth())
+                .careerStartAt(dto.getCareerStartAt())
+                .createdAt(dto.getCreatedAt())
+                .createdBy(dto.getCreatedBy())
+                .email(dto.getEmail())
+                .nickname(dto.getNickname())
+                .password(dto.getPassword())
+                .isActive(dto.isActive())
+                .showsBirth(dto.isShowsBirth())
+                .build();
+
+    }
+
 }

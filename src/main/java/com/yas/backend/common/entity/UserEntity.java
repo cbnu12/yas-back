@@ -1,6 +1,7 @@
 package com.yas.backend.common.entity;
 
 import com.yas.backend.common.entity.TeamEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
+@Builder
 @Getter
 @Entity
 @NoArgsConstructor
