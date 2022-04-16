@@ -1,9 +1,6 @@
 package com.yas.backend.common.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -15,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 @Builder
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +22,7 @@ public class UserEntity {
     @Id
     private Long id;
 
-    @Column(name ="email")
+    @Column
     private String email;
 
     @Column(nullable = false)
