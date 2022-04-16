@@ -2,9 +2,9 @@ package com.yas.backend.domain.team.mapper;
 
 import com.yas.backend.common.entity.*;
 import com.yas.backend.common.enums.MeetingMethod;
-import com.yas.backend.common.exception.MemberNotFoundException;
+import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.common.values.Schedule;
-import com.yas.backend.domain.member.repository.MemberRepository;
+import com.yas.backend.domain.user.repository.UserRepository;
 import com.yas.backend.domain.team.Team;
 import com.yas.backend.domain.team.dto.TeamDto;
 import lombok.RequiredArgsConstructor;
@@ -16,17 +16,17 @@ import java.time.DayOfWeek;
 @RequiredArgsConstructor
 public class TeamMapper {
 
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
 
     public Team dtoToDomain(final TeamDto teamDto) {
         return Team.builder()
                 .id(teamDto.id())
                 .name(teamDto.name())
                 .meetingMethod(MeetingMethod.valueOf(teamDto.meetingMethod()))
-                .totalMemberCount(teamDto.totalMemberCount())
+                .totalUserCount(teamDto.totalUserCount())
                 .description(teamDto.description())
                 .ownerId(teamDto.ownerId())
-                .memberIds(teamDto.memberIds())
+                .userIds(teamDto.userIds())
                 .hashtags(teamDto.hashtags())
                 .techStacks(teamDto.techStacks())
                 .joiningCondition(teamDto.joiningCondition())
@@ -39,10 +39,10 @@ public class TeamMapper {
                 .id(teamDto.id())
                 .name(teamDto.name())
                 .meetingMethod(MeetingMethod.valueOf(teamDto.meetingMethod()))
-                .totalMemberCount(teamDto.totalMemberCount())
+                .totalUserCount(teamDto.totalUserCount())
                 .description(teamDto.description())
-                .owner(memberRepository.findById(teamDto.ownerId())
-                        .orElseThrow(MemberNotFoundException::new))
+                .owner(userRepository.findById(teamDto.ownerId())
+                        .orElseThrow(UserNotFoundException::new))
                 .build();
     }
 
@@ -51,10 +51,10 @@ public class TeamMapper {
                 teamEntity.getId(),
                 teamEntity.getName(),
                 teamEntity.getMeetingMethod().name(),
-                teamEntity.getTotalMemberCount(),
+                teamEntity.getTotalUserCount(),
                 teamEntity.getDescription(),
                 teamEntity.getOwner().getId(),
-                teamEntity.getJoins().stream().map(JoinEntity::getMember).map(MemberEntity::getId).toList(),
+                teamEntity.getJoins().stream().map(JoinEntity::getUser).map(UserEntity::getId).toList(),
                 teamEntity.getHashtags().stream().map(HashtagEntity::getName).toList(),
                 teamEntity.getTechStacks().stream().map(TechStackEntity::getName).toList(),
                 teamEntity.getJoiningConditions().stream().map(JoiningConditionEntity::getCondition).toList(),
@@ -70,10 +70,10 @@ public class TeamMapper {
                 team.getId(),
                 team.getName(),
                 team.getMeetingMethod().name(),
-                team.getTotalMemberCount(),
+                team.getTotalUserCount(),
                 team.getDescription(),
                 team.getOwnerId(),
-                team.getMemberIds(),
+                team.getUserIds(),
                 team.getHashtags(),
                 team.getTechStacks(),
                 team.getJoiningCondition(),

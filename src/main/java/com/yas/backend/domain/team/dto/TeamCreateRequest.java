@@ -11,8 +11,8 @@ public record TeamCreateRequest(
         String name,
 
         @Schema(description = "회원수")
-        @JsonProperty("totalMemberCount")
-        Integer totalMemberCount,
+        @JsonProperty("totalUserCount")
+        Integer totalUserCount,
 
         @Schema(description = "설명")
         @JsonProperty("description")

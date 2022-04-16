@@ -1,14 +1,13 @@
-package com.yas.backend.domain.member.data;
+package com.yas.backend.domain.user.data;
 
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @Builder
-public class Member {
+public class User {
     private String email;
     private String password;
     private String nickname;
