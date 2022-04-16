@@ -1,12 +1,11 @@
 package com.yas.backend.domain.user.service;
 
 import com.yas.backend.common.entity.UserEntity;
-import com.yas.backend.common.enums.LoginResponseCode;
+import com.yas.backend.common.exception.InvalidPasswordException;
 import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.user.data.User;
 import com.yas.backend.domain.user.data.dto.UserDto;
 import com.yas.backend.domain.user.data.mapper.UserMapper;
-import com.yas.backend.domain.user.data.response.LoginResponse;
 import com.yas.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,19 +32,20 @@ public class UserService {
     }
 
     public UserDto joinUser(UserDto userDto) {
-        UserEntity userEntity= userMapper.dtoToEntity(userDto);
+        UserEntity userEntity = userMapper.dtoToEntity(userDto);
         return userMapper.entityToDto(this.userRepository.save(userEntity));
     }
 
-    public LoginResponse login(UserDto userDto){
-        LoginResponse loginResponse= new LoginResponse();
-        if (userRepository.findByEmail(userDto.getEmail()).isEmpty()){
-            loginResponse.setLoginResponseCode(LoginResponseCode.FAIL_EMAIL);
-        }else if (userRepository.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword()).isEmpty()){
-            loginResponse.setLoginResponseCode(LoginResponseCode.FAIL_PASSWORD);
-        }else{
-            loginResponse.setLoginResponseCode(LoginResponseCode.SUCCESS);
+    public UserDto signIn(UserDto userDto) {
+
+
+        String realPassword = userRepository.findByEmail(userDto.getEmail())
+                .orElseThrow(UserNotFoundException::new)
+                .getPassword();
+
+        if (realPassword.equals(userDto.getPassword())) {
+            throw new InvalidPasswordException();
         }
-        return loginResponse;
+        return userDto;
     }
 }

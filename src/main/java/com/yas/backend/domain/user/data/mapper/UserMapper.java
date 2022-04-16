@@ -2,6 +2,7 @@ package com.yas.backend.domain.user.data.mapper;
 
 import com.yas.backend.common.entity.UserEntity;
 import com.yas.backend.domain.user.data.User;
+import com.yas.backend.domain.user.data.dto.SignUpRequest;
 import com.yas.backend.domain.user.data.response.UserResponse;
 import com.yas.backend.domain.user.data.dto.UserDto;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,8 @@ public class UserMapper {
                 .birth(entity.getBirth())
                 .careerStartAt(entity.getCareerStartAt()).build();
     }
+
+
 
     public UserDto domainToDto(User domain) {
         return UserDto.builder()
