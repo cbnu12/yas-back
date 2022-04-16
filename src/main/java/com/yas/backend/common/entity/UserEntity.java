@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
 @Builder
 @Getter
 @Setter
@@ -62,4 +63,7 @@ public class UserEntity {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    @Column
+    private int signInFailCount;
 }
