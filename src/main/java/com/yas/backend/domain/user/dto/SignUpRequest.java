@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 public class SignUpRequest {
@@ -36,19 +35,4 @@ public class SignUpRequest {
     @JsonProperty("careerStartAt")
     @JsonFormat(pattern = "yyyyMMdd", timezone = "Asia/Seoul")
     private LocalDate careerStartAt;
-
-    @Schema(description = "활동여부")
-    @JsonProperty("isActive")
-    private boolean isActive;
-
-    @Schema(description = "아이디생성자")
-    @JsonProperty("createdBy")
-    private String createdBy;
-
-    @Schema(description = "아이디생성일")
-    @JsonProperty("createdAt")
-    @JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "Asia/Seoul")
-    private LocalDateTime createdAt;
-
-
 }

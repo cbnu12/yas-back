@@ -29,31 +29,30 @@ public class UserService {
     }
 
     public UserDto signUp(UserDto userDto) {
-        UserEntity userEntity = userMapper.dtoToEntity(userDto);
-        return userMapper.entityToDto(this.userRepository.save(userEntity));
+        UserEntity userEntity = this.userMapper.dtoToEntity(userDto);
+        return this.userMapper.entityToDto(this.userRepository.save(userEntity));
     }
 
     public UserDto signIn(UserDto userDto) {
-        String realPassword = userRepository.findByEmail(userDto.getEmail())
-                .orElseThrow(UserNotFoundException::new)
-                .getPassword();
+        UserEntity entity = this.userRepository.findByEmail(userDto.getEmail()).orElseThrow(UserNotFoundException::new);
+        if (entity.getPassword().equals(userDto.getPassword())) throw new InvalidPasswordException();
 
-        if (realPassword.equals(userDto.getPassword())) {
-            throw new InvalidPasswordException();
-        }
-        return userDto;
+        return this.userMapper.entityToDto(entity);
     }
 
-    public UserDto updatePassword(Long id, String password) {
+    public UserDto updatePassword(Long id, String oldPassword, String newPassword) {
         UserEntity entity = this.userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        entity.setPassword(password);
+        if (entity.getPassword().equals(oldPassword)) throw new InvalidPasswordException();
+
+        entity.setPassword(newPassword);
         UserEntity updateEntity = this.userRepository.save(entity);
         return this.userMapper.entityToDto(updateEntity);
     }
 
-    public Boolean signOut(Long id) {
+    public UserDto signOut(Long id) {
         UserEntity entity = this.userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        this.userRepository.delete(entity);
-        return true;
+        entity.setActive(false);
+        UserEntity deleteResult = this.userRepository.save(entity);
+        return this.userMapper.entityToDto(deleteResult);
     }
 }
