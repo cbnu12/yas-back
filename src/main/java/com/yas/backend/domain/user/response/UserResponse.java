@@ -1,4 +1,4 @@
-package com.yas.backend.domain.user.data.response;
+package com.yas.backend.domain.user.response;
 
 import lombok.Builder;
 import lombok.Getter;
