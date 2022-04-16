@@ -1,4 +1,4 @@
-package com.yas.backend.domain.user.data.dto;
+package com.yas.backend.domain.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;

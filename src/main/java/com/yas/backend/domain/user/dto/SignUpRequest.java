@@ -1,14 +1,12 @@
-package com.yas.backend.domain.user.data.dto;
+package com.yas.backend.domain.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.yas.backend.common.entity.JoinEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 public class SignUpRequest {
