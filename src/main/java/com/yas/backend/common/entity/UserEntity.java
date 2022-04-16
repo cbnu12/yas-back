@@ -1,6 +1,7 @@
 package com.yas.backend.common.entity;
 
-import com.yas.backend.common.entity.TeamEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
@@ -12,12 +13,13 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
+@Builder
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "members")
-public class MemberEntity {
+@AllArgsConstructor
+@Table(name = "users")
+public class UserEntity {
 
     @Id
     private Long id;
@@ -46,7 +48,7 @@ public class MemberEntity {
     @Column
     private LocalDateTime lastPasswordUpdateAt;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "user")
     private List<JoinEntity> joins;
 
     @CreatedBy

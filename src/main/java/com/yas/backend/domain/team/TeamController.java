@@ -30,7 +30,7 @@ public class TeamController {
                 null ,
                 request.name(),
                 request.meetingMethod(),
-                request.totalMemberCount(),
+                request.totalUserCount(),
                 request.description(),
                 ownerId,
                 new ArrayList<>(),

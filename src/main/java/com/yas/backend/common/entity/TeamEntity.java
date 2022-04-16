@@ -30,14 +30,14 @@ public class TeamEntity {
     @Column(name = "meeting_method", nullable = false)
     private MeetingMethod meetingMethod;
 
-    @Column(name = "total_member_count", nullable = false)
-    private Integer totalMemberCount;
+    @Column(name = "total_user_count", nullable = false)
+    private Integer totalUserCount;
 
     @Column(name = "description", nullable = false)
     private String description;
 
     @OneToOne
-    private MemberEntity owner;
+    private UserEntity owner;
 
     @OneToMany(mappedBy = "team")
     private List<JoinEntity> joins;

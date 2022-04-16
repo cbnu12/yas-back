@@ -6,7 +6,7 @@ import java.util.List;
 
 public record TeamCreateRequest(
     @JsonProperty("name") String name,
-    @JsonProperty("totalMemberCount") Integer totalMemberCount,
+    @JsonProperty("totalUserCount") Integer totalUserCount,
     @JsonProperty("description") String description,
     @JsonProperty("hashtags") List<String> hashtags,
     @JsonProperty("techStacks") List<String> techStacks,
