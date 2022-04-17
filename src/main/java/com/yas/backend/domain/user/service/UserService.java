@@ -40,7 +40,7 @@ public class UserService {
 
         if (userEntity.getSignInFailCount()>4) {
             throw new SignOverException();
-        }else if (userEntity.getPassword().equals(userDto.getPassword())) {
+        }else if (!userEntity.getPassword().equals(userDto.getPassword())) {
             userEntity.setSignInFailCount(userEntity.getSignInFailCount()+1);
             userRepository.save(userEntity);
             throw new InvalidPasswordException();
@@ -50,7 +50,7 @@ public class UserService {
 
     public UserDto updatePassword(Long id, String oldPassword, String newPassword) {
         UserEntity entity = this.userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        if (entity.getPassword().equals(oldPassword)) throw new InvalidPasswordException();
+        if (!entity.getPassword().equals(oldPassword)) throw new InvalidPasswordException();
 
         entity.setPassword(newPassword);
         UserEntity updateEntity = this.userRepository.save(entity);

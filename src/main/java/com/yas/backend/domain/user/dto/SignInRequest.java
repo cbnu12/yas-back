@@ -9,9 +9,9 @@ public class SignInRequest {
 
     @Schema(description = "이메일", example = "example@naver.com")
     @JsonProperty("email")
-    private String email;
+    String email;
 
     @Schema(description = "비밀번호")
     @JsonProperty("password")
-    private String password;
+    String password;
 }
