@@ -20,9 +20,10 @@ import java.util.List;
 public class UserEntity {
 
     @Id
+    @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)

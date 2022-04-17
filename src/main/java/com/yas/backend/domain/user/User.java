@@ -14,4 +14,12 @@ public class User {
     private LocalDate birth;
     private Boolean showsBirth;
     private LocalDate careerStartAt;
+
+    public int getBirthYear() {
+        return LocalDate.now().getYear() - this.birth.getYear();
+    }
+
+    public int getCareerYear() {
+        return LocalDate.now().getYear() - this.careerStartAt.getYear();
+    }
 }

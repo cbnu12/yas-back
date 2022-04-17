@@ -33,8 +33,8 @@ public class UserMapper {
         return UserDto.builder()
                 .email(domain.getEmail())
                 .nickname(domain.getNickname())
-                .years(LocalDate.now().getYear() - domain.getBirth().getYear())
-                .careerYear(LocalDate.now().getYear() - domain.getCareerStartAt().getYear())
+                .years(domain.getBirthYear())
+                .careerYear(domain.getCareerYear())
                 .build();
     }
 

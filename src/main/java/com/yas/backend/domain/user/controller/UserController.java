@@ -47,13 +47,13 @@ public class UserController {
 
     @PostMapping("/users")
     @Operation(summary = "회원가입", description = "회원가입")
-    public UserResponse createUser(SignUpRequest signUpRequest) {
+    public UserResponse createUser(@RequestBody SignUpRequest signUpRequest) {
         return this.signUp(signUpRequest);
     }
 
     @PostMapping("/users/signUp")
     @Operation(summary = "회원가입", description = "회원가입")
-    public UserResponse signUp(SignUpRequest signUpRequest) {
+    public UserResponse signUp(@RequestBody SignUpRequest signUpRequest) {
         UserDto userDto = UserDto.builder()
                 .birth(signUpRequest.getBirth())
                 .careerStartAt(signUpRequest.getCareerStartAt())
@@ -69,7 +69,7 @@ public class UserController {
 
     @PostMapping("/users/signIn")
     @Operation(summary = "로그인", description = "로그인")
-    public UserResponse login(SignInRequest signInRequest) {
+    public UserResponse login(@RequestBody SignInRequest signInRequest) {
         UserDto userDto = UserDto.builder()
                 .email(signInRequest.getEmail())
                 .password(signInRequest.getPassword())
