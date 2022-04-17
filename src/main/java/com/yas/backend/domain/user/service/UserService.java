@@ -2,6 +2,7 @@ package com.yas.backend.domain.user.service;
 
 import com.yas.backend.common.entity.UserEntity;
 import com.yas.backend.common.exception.InvalidPasswordException;
+import com.yas.backend.common.exception.SignOverException;
 import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.user.dto.UserDto;
 import com.yas.backend.domain.user.mapper.UserMapper;
@@ -29,15 +30,22 @@ public class UserService {
     }
 
     public UserDto signUp(UserDto userDto) {
-        UserEntity userEntity = this.userMapper.dtoToEntity(userDto);
-        return this.userMapper.entityToDto(this.userRepository.save(userEntity));
+        UserEntity userEntity = userMapper.dtoToEntity(userDto);
+        return userMapper.entityToDto(this.userRepository.save(userEntity));
     }
 
     public UserDto signIn(UserDto userDto) {
-        UserEntity entity = this.userRepository.findByEmail(userDto.getEmail()).orElseThrow(UserNotFoundException::new);
-        if (entity.getPassword().equals(userDto.getPassword())) throw new InvalidPasswordException();
+       UserEntity userEntity = userRepository.findByEmail(userDto.getEmail())
+                .orElseThrow(UserNotFoundException::new);
 
-        return this.userMapper.entityToDto(entity);
+        if (userEntity.getSignInFailCount()>4) {
+            throw new SignOverException();
+        }else if (userEntity.getPassword().equals(userDto.getPassword())) {
+            userEntity.setSignInFailCount(userEntity.getSignInFailCount()+1);
+            userRepository.save(userEntity);
+            throw new InvalidPasswordException();
+        }
+        return userDto;
     }
 
     public UserDto updatePassword(Long id, String oldPassword, String newPassword) {
