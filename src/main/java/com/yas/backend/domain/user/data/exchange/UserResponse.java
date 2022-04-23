@@ -12,4 +12,8 @@ public class UserResponse {
     private String nickname;
     private Integer birthYear;
     private Integer careerYear;
+
+    public static UserResponse empty() {
+        return UserResponse.builder().build();
+    }
 }

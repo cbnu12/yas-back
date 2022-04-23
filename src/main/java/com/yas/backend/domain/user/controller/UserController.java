@@ -1,6 +1,7 @@
 package com.yas.backend.domain.user.controller;
 
 import com.yas.backend.common.controller.BaseController;
+import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.user.data.dto.UserDto;
 import com.yas.backend.domain.user.data.exchange.UserSearchRequest;
 import com.yas.backend.domain.user.data.mapper.UserMapper;
@@ -28,6 +29,11 @@ public class UserController extends BaseController {
 
     @GetMapping("user")
     public UserResponse findUserByEmail(UserSearchRequest request) {
-        return userMapper.dtoToResponse(userSearchService.findUserByEmail(request.toDto()));
+        try {
+            return userMapper.dtoToResponse(userSearchService.findUserByEmail(request.toDto()));
+        } catch (UserNotFoundException e) {
+            log.info(e.getMessage());
+            return UserResponse.empty();
+        }
     }
 }

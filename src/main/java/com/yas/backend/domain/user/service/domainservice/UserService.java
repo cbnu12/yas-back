@@ -24,7 +24,7 @@ public class UserService {
     }
 
     public List<UserDto> findAllUserByIsActive() {
-        return userRepository.findByActive(Boolean.TRUE).stream()
+        return userRepository.findByIsActive(Boolean.TRUE).stream()
                 .map(userMapper::entityToDto)
                 .toList();
     }
