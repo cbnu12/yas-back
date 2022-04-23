@@ -1,7 +1,6 @@
 package com.yas.backend.domain.user.service;
 
 import com.yas.backend.domain.user.data.dto.UserDto;
-import com.yas.backend.domain.user.data.exchange.UserResponse;
 import com.yas.backend.domain.user.data.mapper.UserMapper;
 import com.yas.backend.domain.user.service.domainservice.UserService;
 import lombok.RequiredArgsConstructor;
