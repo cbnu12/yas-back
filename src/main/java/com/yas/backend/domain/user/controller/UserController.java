@@ -1,5 +1,6 @@
 package com.yas.backend.domain.user.controller;
 
+import com.yas.backend.common.controller.BaseController;
 import com.yas.backend.domain.user.data.dto.UserDto;
 import com.yas.backend.domain.user.data.mapper.UserMapper;
 import com.yas.backend.domain.user.data.response.LoginResponse;
@@ -16,27 +17,26 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/user")
-public class UserController {
+public class UserController extends BaseController {
     private final UserService userService;
     private final UserMapper userMapper;
 
-    @GetMapping("s")
+    @GetMapping("users")
     public List<UserResponse> findAllActiveUser() {
         return userService.findAllActiveUser().stream().map(userMapper::dtoToResponse).toList();
     }
 
-    @GetMapping()
+    @GetMapping("user")
     public UserResponse findActiveUserByEmail(@Param("email") String email) {
         return userMapper.dtoToResponse(userService.findUserByEmail(email));
     }
 
-    @PostMapping("/join")
+    @PostMapping("/sign-up")
     public UserResponse joinUser(UserDto userDto) {
         return userMapper.dtoToResponse(userService.joinUser(userDto));
     }
 
-    @PostMapping("/login")
+    @PostMapping("/sign-in")
     public LoginResponse login(UserDto userDto) {
         return userService.login(userDto);
     }
