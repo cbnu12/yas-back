@@ -1,4 +1,4 @@
-package com.yas.backend.domain.user.data.response;
+package com.yas.backend.domain.user.data.exchange;
 
 import com.yas.backend.common.enums.LoginResponseCode;
 import lombok.Getter;
