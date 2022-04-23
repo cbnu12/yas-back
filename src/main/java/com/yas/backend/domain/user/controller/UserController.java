@@ -30,15 +30,4 @@ public class UserController extends BaseController {
     public UserResponse findActiveUserByEmail(@Param("email") String email) {
         return userMapper.dtoToResponse(userService.findUserByEmail(email));
     }
-
-    @PostMapping("/sign-up")
-    public UserResponse joinUser(UserDto userDto) {
-        return userMapper.dtoToResponse(userService.joinUser(userDto));
-    }
-
-    @PostMapping("/sign-in")
-    public LoginResponse login(UserDto userDto) {
-        return userService.login(userDto);
-    }
-
 }
