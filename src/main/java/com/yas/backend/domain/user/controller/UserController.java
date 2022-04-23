@@ -19,11 +19,12 @@ import java.util.List;
 public class UserController extends BaseController {
     private final UserSearchService userSearchService;
     private final UserMapper userMapper;
-//
-//    @GetMapping("users")
-//    public List<UserResponse> findAllActiveUser() {
-//        return userService.findAllActiveUser().stream().map(userMapper::dtoToResponse).toList();
-//    }
+
+    @GetMapping("users")
+    public List<UserResponse> findAllActiveUser() {
+        return userSearchService.findAllActiveUser()
+                .stream().map(userMapper::dtoToResponse).toList();
+    }
 
     @GetMapping("user")
     public UserResponse findUserByEmail(UserSearchRequest request) {

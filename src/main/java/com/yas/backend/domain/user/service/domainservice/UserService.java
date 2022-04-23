@@ -8,6 +8,8 @@ import com.yas.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -21,4 +23,9 @@ public class UserService {
         return userMapper.entityToDto(userEntity);
     }
 
+    public List<UserDto> findAllUserByIsActive() {
+        return userRepository.findByActive(Boolean.TRUE).stream()
+                .map(userMapper::entityToDto)
+                .toList();
+    }
 }
