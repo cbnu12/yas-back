@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +28,10 @@ public class UserService {
         return userRepository.findByIsActive(Boolean.TRUE).stream()
                 .map(userMapper::entityToDto)
                 .toList();
+    }
+
+    public Optional<UserDto> findByEmailAndPassword(UserDto userDto) {
+        return userRepository.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword())
+                .map(userMapper::entityToDto);
     }
 }
