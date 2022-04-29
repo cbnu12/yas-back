@@ -2,10 +2,9 @@ package com.yas.backend.domain.user.controller;
 
 import com.yas.backend.common.controller.BaseController;
 import com.yas.backend.common.exception.UserNotFoundException;
-import com.yas.backend.domain.user.data.dto.UserDto;
+import com.yas.backend.domain.user.data.exchange.UserResponse;
 import com.yas.backend.domain.user.data.exchange.UserSearchRequest;
 import com.yas.backend.domain.user.data.mapper.UserMapper;
-import com.yas.backend.domain.user.data.exchange.UserResponse;
 import com.yas.backend.domain.user.service.UserSearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

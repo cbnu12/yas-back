@@ -4,9 +4,9 @@ import com.yas.backend.common.entity.*;
 import com.yas.backend.common.enums.MeetingMethod;
 import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.common.values.Schedule;
-import com.yas.backend.domain.user.repository.UserRepository;
 import com.yas.backend.domain.team.Team;
 import com.yas.backend.domain.team.dto.TeamDto;
+import com.yas.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

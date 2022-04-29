@@ -1,6 +1,6 @@
 package com.yas.backend.domain.user.data.exchange;
 
-import com.yas.backend.domain.user.data.dto.UserDto;
+import com.yas.backend.domain.user.dto.UserDto;
 
 public record UserSearchRequest(
         String email
