@@ -17,6 +17,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
+    public UserDto findById(Long id) {
+        return userMapper.entityToDto(userRepository.findById(id)
+                .orElseThrow(UserNotFoundException::new));
+    }
+
     public UserDto findByEmail(String email) {
         UserEntity userEntity = userRepository.findByEmail(email)
                 .orElseThrow(UserNotFoundException::new);
