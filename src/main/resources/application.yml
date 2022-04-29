@@ -8,6 +8,9 @@ spring:
     activate:
       on-profile: local
   jpa:
+    properties:
+      hibernate:
+        format_sql: true
     hibernate:
       ddl-auto: create-drop
     generate-ddl: true

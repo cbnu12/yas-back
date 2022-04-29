@@ -1,4 +1,4 @@
-package com.yas.backend.domain.user.response;
+package com.yas.backend.domain.user.data.exchange;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -12,4 +12,8 @@ public class UserResponse {
     private String nickname;
     private Integer birthYear;
     private Integer careerYear;
+
+    public static UserResponse empty() {
+        return UserResponse.builder().build();
+    }
 }

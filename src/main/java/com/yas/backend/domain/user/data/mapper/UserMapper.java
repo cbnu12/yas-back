@@ -1,9 +1,10 @@
-package com.yas.backend.domain.user.mapper;
+package com.yas.backend.domain.user.data.mapper;
 
 import com.yas.backend.common.entity.UserEntity;
+
 import com.yas.backend.domain.user.User;
+import com.yas.backend.domain.user.data.exchange.UserResponse;
 import com.yas.backend.domain.user.dto.UserDto;
-import com.yas.backend.domain.user.response.UserResponse;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -33,8 +34,8 @@ public class UserMapper {
         return UserDto.builder()
                 .email(domain.getEmail())
                 .nickname(domain.getNickname())
-                .years(domain.getBirthYear())
-                .careerYear(domain.getCareerYear())
+                .years(LocalDate.now().getYear() - domain.getBirth().getYear())
+                .careerYear(LocalDate.now().getYear() - domain.getCareerStartAt().getYear())
                 .build();
     }
 
