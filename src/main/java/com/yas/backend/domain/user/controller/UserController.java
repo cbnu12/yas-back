@@ -9,6 +9,7 @@ import com.yas.backend.domain.user.service.UserSearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,9 +22,12 @@ public class UserController extends BaseController {
     private final UserMapper userMapper;
 
     @GetMapping("users")
-    public List<UserResponse> findAllActiveUser() {
-        return userSearchService.findAllActiveUser()
-                .stream().map(userMapper::dtoToResponse).toList();
+    public List<UserResponse> findAll(
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String nickname,
+            @RequestParam(required = false) Boolean isActive
+    ) {
+        return userSearchService.findAll(email, nickname, isActive).stream().map(userMapper::dtoToResponse).toList();
     }
 
     @GetMapping("user")

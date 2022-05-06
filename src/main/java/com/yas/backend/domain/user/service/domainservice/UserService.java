@@ -5,7 +5,9 @@ import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.user.data.mapper.UserMapper;
 import com.yas.backend.domain.user.dto.UserDto;
 import com.yas.backend.domain.user.repository.UserRepository;
+import com.yas.backend.domain.user.specification.UserSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,17 +24,23 @@ public class UserService {
                 .orElseThrow(UserNotFoundException::new));
     }
 
+    public List<UserDto> findAll(String email, String nickname, Boolean isActive) {
+        Specification<UserEntity> specification = (root, query, builder) -> null;
+        if (email != null)
+            specification = specification.and(UserSpecification.equalEmail(email));
+        if (nickname != null)
+            specification = specification.and(UserSpecification.likeNickname(nickname));
+        if (isActive != null)
+            specification = specification.and(UserSpecification.isActive(isActive));
+
+        return userRepository.findAll(specification).stream().map(userMapper::entityToDto).toList();
+    }
+
     public UserDto findByEmail(String email) {
         UserEntity userEntity = userRepository.findByEmail(email)
                 .orElseThrow(UserNotFoundException::new);
 
         return userMapper.entityToDto(userEntity);
-    }
-
-    public List<UserDto> findAllUserByIsActive() {
-        return userRepository.findByIsActive(Boolean.TRUE).stream()
-                .map(userMapper::entityToDto)
-                .toList();
     }
 
     public Optional<UserDto> findByEmailAndPassword(UserDto userDto) {

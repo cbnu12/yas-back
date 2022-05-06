@@ -13,15 +13,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserSearchService {
-
     private final UserService userService;
     private final UserMapper userMapper;
 
-    public UserDto findUserByEmail(UserDto userDto) {
-        return userService.findByEmail(userDto.getEmail());
+    public List<UserDto> findAll(String email, String nickname, Boolean isActive) {
+        return userService.findAll(email, nickname, isActive);
     }
 
-    public List<UserDto> findAllActiveUser() {
-        return userService.findAllUserByIsActive();
+    public UserDto findUserByEmail(UserDto userDto) {
+        return userService.findByEmail(userDto.getEmail());
     }
 }
