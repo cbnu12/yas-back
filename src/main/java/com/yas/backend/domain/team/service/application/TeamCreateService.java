@@ -18,4 +18,12 @@ public class TeamCreateService {
         Team team = teamMapper.dtoToDomain(teamDto);
         return teamService.create(teamMapper.domainToDto(team)).id();
     }
+
+    public TeamDto update(final TeamDto teamDto) {
+        return teamDto;
+    }
+
+    public boolean delete() {
+        return true;
+    }
 }
