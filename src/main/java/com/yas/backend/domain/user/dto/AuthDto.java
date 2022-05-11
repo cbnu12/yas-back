@@ -1,4 +1,4 @@
-package com.yas.backend.domain.user.data.dto;
+package com.yas.backend.domain.user.dto;
 
 public record AuthDto(
         String email,

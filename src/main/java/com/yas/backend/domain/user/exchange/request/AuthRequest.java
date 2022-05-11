@@ -1,6 +1,6 @@
-package com.yas.backend.domain.user.data.exchange;
+package com.yas.backend.domain.user.exchange.request;
 
-import com.yas.backend.domain.user.data.dto.AuthDto;
+import com.yas.backend.domain.user.dto.AuthDto;
 
 public record AuthRequest(
         String email,

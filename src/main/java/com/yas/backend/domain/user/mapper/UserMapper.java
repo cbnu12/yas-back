@@ -1,9 +1,9 @@
-package com.yas.backend.domain.user.data.mapper;
+package com.yas.backend.domain.user.mapper;
 
 import com.yas.backend.common.entity.UserEntity;
 
 import com.yas.backend.domain.user.User;
-import com.yas.backend.domain.user.data.exchange.UserResponse;
+import com.yas.backend.domain.user.exchange.response.UserResponse;
 import com.yas.backend.domain.user.dto.UserDto;
 import org.springframework.stereotype.Component;
 

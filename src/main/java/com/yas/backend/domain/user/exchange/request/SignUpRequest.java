@@ -1,4 +1,4 @@
-package com.yas.backend.domain.user.dto;
+package com.yas.backend.domain.user.exchange.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

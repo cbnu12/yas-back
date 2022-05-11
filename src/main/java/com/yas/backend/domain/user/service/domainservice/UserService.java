@@ -2,7 +2,7 @@ package com.yas.backend.domain.user.service.domainservice;
 
 import com.yas.backend.common.entity.UserEntity;
 import com.yas.backend.common.exception.UserNotFoundException;
-import com.yas.backend.domain.user.data.mapper.UserMapper;
+import com.yas.backend.domain.user.mapper.UserMapper;
 import com.yas.backend.domain.user.dto.UserDto;
 import com.yas.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

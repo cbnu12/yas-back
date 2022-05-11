@@ -1,4 +1,4 @@
-package com.yas.backend.domain.user.data.exchange;
+package com.yas.backend.domain.user.exchange.request;
 
 import com.yas.backend.domain.user.dto.UserDto;
 

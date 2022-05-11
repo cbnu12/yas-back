@@ -1,8 +1,8 @@
 package com.yas.backend.domain.user.controller;
 
 import com.yas.backend.common.controller.BaseController;
-import com.yas.backend.domain.user.data.exchange.AuthRequest;
-import com.yas.backend.domain.user.data.exchange.AuthResponse;
+import com.yas.backend.domain.user.exchange.request.AuthRequest;
+import com.yas.backend.domain.user.exchange.response.AuthResponse;
 import com.yas.backend.domain.user.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
