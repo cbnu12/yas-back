@@ -1,4 +1,4 @@
-package com.yas.backend.domain.team.service;
+package com.yas.backend.domain.team.service.domainservice;
 
 import com.yas.backend.common.entity.TeamEntity;
 import com.yas.backend.domain.team.dto.TeamDto;
@@ -17,5 +17,9 @@ public class TeamService {
     public TeamDto create(TeamDto teamDto) {
         TeamEntity teamEntity = teamMapper.dtoToEntity(teamDto);
         return teamMapper.entityToDto(teamRepository.save(teamEntity));
+    }
+
+    public TeamDto findByName(String name){
+        return teamMapper.entityToDto(teamRepository.findByName(name).orElseThrow());
     }
 }

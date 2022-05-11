@@ -1,9 +1,9 @@
-package com.yas.backend.domain.team.service.application;
+package com.yas.backend.domain.team.service;
 
 import com.yas.backend.domain.team.Team;
 import com.yas.backend.domain.team.dto.TeamDto;
 import com.yas.backend.domain.team.mapper.TeamMapper;
-import com.yas.backend.domain.team.service.TeamService;
+import com.yas.backend.domain.team.service.domainservice.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

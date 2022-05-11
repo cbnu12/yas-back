@@ -42,6 +42,9 @@ public class TeamEntity {
     @OneToMany(mappedBy = "team")
     private List<JoinEntity> joins;
 
+    @OneToMany(mappedBy = "team")
+    private List<InviteEntity> invite;
+
     @OneToMany
     @JoinColumn(name = "hashtag_id")
     private List<HashtagEntity> hashtags;

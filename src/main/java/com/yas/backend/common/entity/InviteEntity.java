@@ -7,9 +7,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Builder
 @Getter
@@ -17,42 +15,23 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
-public class UserEntity {
-
+@Table(name = "invite")
+public class InviteEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
-    @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false, unique = true)
-    private String nickname;
-
-    @Column
-    private LocalDate birth;
-
-    @Column
-    private boolean showsBirth;
-
-    @Column
-    private LocalDate careerStartAt;
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private TeamEntity team;
 
     @Column
     private boolean isActive;
-
-    @Column
-    private LocalDateTime lastPasswordUpdateAt;
-
-    @OneToMany(mappedBy = "user")
-    private List<JoinEntity> joins;
-
-    @OneToMany(mappedBy = "user")
-    private List<InviteEntity> invite;
 
     @CreatedBy
     @Column(updatable = false)
@@ -68,6 +47,5 @@ public class UserEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    @Column
-    private int signInFailCount;
+
 }

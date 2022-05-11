@@ -1,8 +1,8 @@
-package com.yas.backend.domain.team;
+package com.yas.backend.domain.team.controller;
 
 import com.yas.backend.domain.team.dto.TeamCreateRequest;
 import com.yas.backend.domain.team.dto.TeamDto;
-import com.yas.backend.domain.team.service.application.TeamCreateService;
+import com.yas.backend.domain.team.service.TeamCreateService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
