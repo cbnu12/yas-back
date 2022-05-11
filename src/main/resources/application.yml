@@ -2,6 +2,15 @@ spring:
   profiles:
     active: local
 
+springdoc:
+  version: '1.0.0'
+  api-docs:
+    path: /api-docs
+    groups:
+      enabled: true
+  swagger-ui:
+    operations-sorter: method
+
 ---
 spring:
   config:
@@ -25,13 +34,6 @@ spring:
       enabled: true
       path: /h2-console
 
-springdoc:
-  version: '1.0.0'
-  api-docs:
-    groups:
-      enabled: true
-  swagger-ui:
-    operations-sorter: method
 ---
 
 spring:
@@ -48,14 +50,6 @@ spring:
     url: jdbc:mysql://localhost:3306/YAS
     username: root
     password: P@6985w0rd
-
-springdoc:
-  version: '1.0.0'
-  api-docs:
-    groups:
-      enabled: true
-  swagger-ui:
-    operations-sorter: method
 
 server:
   port: 8080
