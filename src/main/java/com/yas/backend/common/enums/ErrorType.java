@@ -1,6 +1,7 @@
 package com.yas.backend.common.enums;
 
 public enum ErrorType {
+    INSERT_CONFLICT("Data Already Exists"),
     NOT_FOUND_USER("User Not Found"),
     NOT_FOUND_TEAM("Team Not Found");
 

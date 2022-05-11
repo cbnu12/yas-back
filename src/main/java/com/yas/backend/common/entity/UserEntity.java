@@ -1,6 +1,9 @@
 package com.yas.backend.common.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -11,6 +14,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@DynamicInsert
+@DynamicUpdate
 @Builder
 @Getter
 @Setter
@@ -48,15 +53,17 @@ public class UserEntity {
     @Column
     private LocalDateTime lastPasswordUpdateAt;
 
+    @Column
+    @ColumnDefault("0")
+    private Integer signInFailCount;
+
     @OneToMany(mappedBy = "user")
     private List<JoinEntity> joins;
 
     @CreatedBy
-    @Column(updatable = false)
     private String createdBy;
 
     @CreatedDate
-    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedBy
@@ -64,7 +71,4 @@ public class UserEntity {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
-
-    @Column
-    private int signInFailCount;
 }

@@ -7,35 +7,69 @@ import com.yas.backend.domain.user.exchange.response.UserResponse;
 import com.yas.backend.domain.user.dto.UserDto;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-
 @Component
 public class UserMapper {
-    public User entityToDomain(UserEntity entity) {
-        return User.builder()
+    public UserDto entityToDto(UserEntity entity) {
+        return UserDto.builder()
+                .id(entity.getId())
                 .email(entity.getEmail())
                 .password(entity.getPassword())
                 .nickname(entity.getNickname())
                 .birth(entity.getBirth())
+                .showsBirth(entity.isShowsBirth())
                 .careerStartAt(entity.getCareerStartAt())
+                .isActive(entity.isActive())
+                .lastPasswordUpdateAt(entity.getLastPasswordUpdateAt())
+                .signInFailCount(entity.getSignInFailCount())
                 .build();
     }
 
-    public UserDto entityToDto(UserEntity entity) {
-        return UserDto.builder()
-                .email(entity.getEmail())
-                .password(entity.getPassword())
-                .nickname(entity.getNickname())
-                .birth(entity.getBirth())
-                .careerStartAt(entity.getCareerStartAt()).build();
+    public UserEntity dtoToEntity(UserDto dto) {
+        return UserEntity.builder()
+                .id(dto.getId())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .nickname(dto.getNickname())
+                .birth(dto.getBirth())
+                .showsBirth(dto.isShowsBirth())
+                .careerStartAt(dto.getCareerStartAt())
+                .isActive(dto.isActive())
+                .lastPasswordUpdateAt(dto.getLastPasswordUpdateAt())
+                .signInFailCount(dto.getSignInFailCount())
+                .build();
+
+    }
+
+    public User dtoToDomain(UserDto dto) {
+        return User.builder()
+                .id(dto.getId())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .nickname(dto.getNickname())
+                .birth(dto.getBirth())
+                .showsBirth(dto.isShowsBirth())
+                .careerStartAt(dto.getCareerStartAt())
+                .isActive(dto.isActive())
+                .lastPasswordUpdateAt(dto.getLastPasswordUpdateAt())
+                .signInFailCount(dto.getSignInFailCount())
+                .build();
     }
 
     public UserDto domainToDto(User domain) {
         return UserDto.builder()
+                .id(domain.getId())
                 .email(domain.getEmail())
+                .password(domain.getPassword())
                 .nickname(domain.getNickname())
-                .years(LocalDate.now().getYear() - domain.getBirth().getYear())
-                .careerYear(LocalDate.now().getYear() - domain.getCareerStartAt().getYear())
+                .birth(domain.getBirth())
+                .showsBirth(domain.isShowsBirth())
+                .careerStartAt(domain.getCareerStartAt())
+                .isActive(domain.isActive())
+                .lastPasswordUpdateAt(domain.getLastPasswordUpdateAt())
+                .signInFailCount(domain.getSignInFailCount())
+
+                .birthYears(domain.getBirthYear())
+                .careerYears(domain.getCareerYear())
                 .build();
     }
 
@@ -43,24 +77,9 @@ public class UserMapper {
         return UserResponse.builder()
                 .email(dto.getEmail())
                 .nickname(dto.getNickname())
-                .birthYear(dto.getYears())
-                .careerYear(dto.getCareerYear())
+                .birthYear(dto.getBirthYears())
+                .careerYear(dto.getCareerYears())
                 .build();
-    }
-
-    public UserEntity dtoToEntity(UserDto dto) {
-        return UserEntity.builder()
-                .birth(dto.getBirth())
-                .careerStartAt(dto.getCareerStartAt())
-                .createdAt(dto.getCreatedAt())
-                .createdBy(dto.getCreatedBy())
-                .email(dto.getEmail())
-                .nickname(dto.getNickname())
-                .password(dto.getPassword())
-                .isActive(dto.isActive())
-                .showsBirth(dto.isShowsBirth())
-                .build();
-
     }
 
 }

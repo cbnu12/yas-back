@@ -3,7 +3,7 @@ package com.yas.backend.common.interceptor;
 import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.config.session.UserSession;
 import com.yas.backend.domain.user.dto.UserDto;
-import com.yas.backend.domain.user.service.domainservice.UserService;
+import com.yas.backend.domain.user.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -33,7 +33,7 @@ public class UserSessionInterceptor implements HandlerInterceptor {
 
         try {
             Long userId = Long.valueOf(rawUserId);
-            UserDto userDto = userService.findById(userId);
+            UserDto userDto = userService.findById(userId).orElseThrow(UserNotFoundException::new);
             userSession.setUserInfo(userId, userDto);
         } catch (NumberFormatException e) {
             return false;
