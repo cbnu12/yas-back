@@ -24,10 +24,13 @@ public class OpenApiConfig {
 
         SecurityScheme securityScheme = new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
                 .in(SecurityScheme.In.HEADER).name("Authorization");
-        SecurityRequirement securityRequirement = new SecurityRequirement().addList("bearerAuth");
+        SecurityScheme xUserIdScheme = new SecurityScheme().type(SecurityScheme.Type.APIKEY).in(SecurityScheme.In.HEADER)
+                .name("X-USER-ID");
+        SecurityRequirement securityRequirement = new SecurityRequirement().addList("bearerAuth").addList("X-USER-ID");
 
         return new OpenAPI()
-                .components(new Components().addSecuritySchemes("bearerAuth", securityScheme))
+                .components(new Components().addSecuritySchemes("bearerAuth", securityScheme)
+                        .addSecuritySchemes("X-USER-ID", xUserIdScheme))
                 .security(List.of(securityRequirement))
                 .info(info);
     }
