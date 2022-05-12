@@ -33,7 +33,7 @@ public class TeamCommandService {
         return teamDto;
     }
 
-    public boolean delete() {
-        return true;
+    public void remove(Long teamId) {
+        teamService.remove(teamId);
     }
 }

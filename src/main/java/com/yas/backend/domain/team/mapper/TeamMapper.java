@@ -1,11 +1,10 @@
 package com.yas.backend.domain.team.mapper;
 
-import com.yas.backend.common.entity.JoinEntity;
-import com.yas.backend.common.entity.TeamEntity;
-import com.yas.backend.common.entity.UserEntity;
+import com.yas.backend.common.entity.*;
 import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.team.Team;
 import com.yas.backend.domain.team.dto.TeamDto;
+import com.yas.backend.domain.team.repository.TeamTechStackRepository;
 import com.yas.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -17,6 +16,7 @@ import java.util.stream.Collectors;
 public class TeamMapper {
 
     private final UserRepository userRepository;
+    private final TeamTechStackRepository teamTechStackRepository;
 
     public Team dtoToDomain(final TeamDto teamDto) {
         return Team.builder()
@@ -42,23 +42,40 @@ public class TeamMapper {
                 .build();
     }
 
-    public TeamDto entityToDto(final TeamEntity teamEntity) {
+    public TeamDto entityToDto(final TeamEntity entity) {
         return TeamDto.builder()
-                .id(teamEntity.getId())
-                .name(teamEntity.getName())
-                .maxUserCount(teamEntity.getMaxUserCount())
-                .description(teamEntity.getDescription())
-                .ownerId(teamEntity.getOwner().getId())
-                .userIds(teamEntity.getJoins().stream()
+                .id(entity.getId())
+                .name(entity.getName())
+                .maxUserCount(entity.getMaxUserCount())
+                .description(entity.getDescription())
+                .ownerId(entity.getOwner().getId())
+                .userIds(entity.getJoins().stream()
                         .map(JoinEntity::getUser)
                         .map(UserEntity::getId)
                         .collect(Collectors.toSet()))
-                .createdAt(teamEntity.getCreatedAt())
+                .createdAt(entity.getCreatedAt())
+                .build();
+    }
+
+    public Team entityToDomain(final TeamEntity entity) {
+        return Team.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .ownerId(entity.getOwner().getId())
+                .maxUserCount(entity.getMaxUserCount())
+                .topic(entity.getTopic().getName())
+                .techStacks(teamTechStackRepository.findByTeamId(entity.getId()).stream()
+                        .map(TeamTechStackEntity::getTechStack)
+                        .map(TechStackEntity::getName)
+                        .collect(Collectors.toSet()))
+                .isActive(entity.isActive())
+                .createdAt(entity.getCreatedAt())
                 .build();
     }
 
 
-    public TeamDto domainToDto(Team team) {
+    public TeamDto domainToDto(final Team team) {
         return TeamDto.builder()
                 .id(team.getId())
                 .name(team.getName())
@@ -68,6 +85,17 @@ public class TeamMapper {
                 .userIds(team.getUserIds())
                 .techStacks(team.getTechStacks())
                 .createdAt(team.getCreatedAt())
+                .build();
+    }
+
+    public TeamEntity domainToEntity(final Team team) {
+        return TeamEntity.builder()
+                .id(team.getId())
+                .name(team.getName())
+                .maxUserCount(team.getMaxUserCount())
+                .description(team.getDescription())
+                .owner(userRepository.findById(team.getOwnerId())
+                        .orElseThrow(UserNotFoundException::new))
                 .build();
     }
 }

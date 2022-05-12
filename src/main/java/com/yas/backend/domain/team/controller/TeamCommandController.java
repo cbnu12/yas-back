@@ -25,15 +25,9 @@ public class TeamCommandController extends BaseController {
         return TeamCreateResponse.of(teamCommandService.create(teamDto));
     }
 
-    @PutMapping("team")
-    @Operation(summary = "팀 수정", description = "Request를 입력받아 팀 데이터 수정")
-    public Long modifyTeam(final TeamCreateRequest request) {
-        return 123L;
-    }
-
-    @DeleteMapping("team")
-    @Operation(summary = "팀 삭제", description = "Request를 입력받아 팀 데이터 삭제")
-    public Long removeTeam(final TeamCreateRequest request) {
-        return 123L;
+    @DeleteMapping("team/{teamId}")
+    @Operation(summary = "팀 삭제", description = "Request를 입력받아 팀 삭제")
+    public void removeTeam(@PathVariable("teamId") Long teamId) {
+        teamCommandService.remove(teamId);
     }
 }

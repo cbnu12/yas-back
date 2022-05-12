@@ -4,3 +4,12 @@ insert into USERS(`email`,`password`,`nickname`,
 values ('temp@temp.com','password','nickname',
         true,now(),true,now(),
         'temp',now(),'temp',now(),3);
+
+insert into TECHSTACKS(name, created_by, created_at, updated_by, updated_at)
+values ('Spring','temp',now(),'temp',now());
+
+
+insert into TEAMS(`name`,`max_user_count`,`description`,
+                  `owner_id`,`topic`,`is_active`,`created_by`,`created_at`,`updated_by`,`updated_at`)
+values ('teamTest',10,'testesttstsetestsetset',
+        1, 1, true, 'temp',now(),'temp',now());

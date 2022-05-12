@@ -21,6 +21,7 @@ import javax.transaction.Transactional;
 
 import static com.yas.backend.util.JsonUtils.toJson;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -72,6 +73,18 @@ class TeamCommandControllerTest {
 
         result.andDo(print())
                 .andExpect(status().is5xxServerError());
+    }
+
+    @Test
+    @DisplayName("03. 팀 삭제 정상 처리")
+    void _03_teamRemoveTest() throws Exception {
+        ResultActions result = mockMvc.perform(
+                delete("/api/team/"+1)
+                        .header(InterceptorConfig.X_USER_ID, "1")
+        );
+
+        result.andDo(print())
+                .andExpect(status().isOk());
     }
 
     TeamCreateRequest getMockTeamCreateRequest(Long ownerId) {

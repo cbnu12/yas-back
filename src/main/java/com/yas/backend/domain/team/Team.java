@@ -18,5 +18,10 @@ public class Team {
     private String topic;
     private Set<String> techStacks;
     private Set<Long> userIds;
+    private Boolean isActive;
     private LocalDateTime createdAt;
+
+    public void deactivate() {
+        this.isActive = Boolean.FALSE;
+    }
 }
