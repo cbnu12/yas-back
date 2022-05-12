@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class InterceptorConfig implements WebMvcConfigurer {
 
     private final UserSessionInterceptor userSessionInterceptor;
+    public static final String X_USER_ID = "X-USER-ID";
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
