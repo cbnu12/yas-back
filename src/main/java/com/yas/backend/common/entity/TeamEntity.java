@@ -10,7 +10,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -44,15 +46,18 @@ public class TeamEntity {
     @JoinColumn(name = "topic")
     private TechStackEntity topic;
 
-    @OneToMany
-    @JoinColumn(name = "tech_stack_id")
-    private List<TechStackEntity> techStacks;
+    @ManyToMany
+    @JoinTable(name = "team_techstack")
+    private Set<TechStackEntity> techStacks = new HashSet<>();
 
     @OneToOne
     private ScheduleEntity schedule;
 
     @OneToMany(mappedBy = "team")
     private List<JoiningConditionEntity> joiningConditions;
+
+    @Column
+    private boolean isActive;
 
     @CreatedBy
     @Column(updatable = false)
