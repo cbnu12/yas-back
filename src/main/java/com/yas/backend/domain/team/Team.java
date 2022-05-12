@@ -1,13 +1,10 @@
 package com.yas.backend.domain.team;
 
-import com.yas.backend.common.enums.MeetingMethod;
-import com.yas.backend.common.values.Schedule;
-import com.yas.backend.common.values.SchedulePolicy;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Builder
@@ -15,15 +12,11 @@ public class Team {
 
     private Long id;
     private String name;
-    private MeetingMethod meetingMethod;
-    private Integer totalUserCount;
     private String description;
+    private Integer maxUserCount;
     private Long ownerId;
-    private List<Long> userIds;
-    private List<String> hashtags;
-    private List<String> techStacks;
-    private List<String> joiningCondition;
-    private SchedulePolicy schedulePolicy;
-    private List<Schedule> meetingSchedules;
+    private String topic;
+    private Set<String> techStacks;
+    private Set<Long> userIds;
     private LocalDateTime createdAt;
 }

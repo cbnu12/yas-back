@@ -15,7 +15,7 @@ public class TeamSearchService {
 
     private final TeamService teamService;
 
-    public List<TeamDto> getTeams(TeamSearchRequest teamSearchRequest) {
+    public List<TeamDto> getTeams(final TeamSearchRequest teamSearchRequest) {
         return teamService.findTeams();
     }
 

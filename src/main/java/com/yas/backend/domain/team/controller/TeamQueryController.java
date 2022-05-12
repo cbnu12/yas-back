@@ -15,8 +15,8 @@ import java.util.List;
 
 @Tag(name = "Teams", description = "팀 query API")
 @Slf4j
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
 public class TeamQueryController {
 
     private final TeamSearchService teamSearchService;

@@ -10,18 +10,25 @@ springdoc:
       enabled: true
   swagger-ui:
     operations-sorter: method
-
 ---
 spring:
+  sql:
+    init:
+      mode: always
+  output:
+    ansi:
+      enabled: always
   config:
     activate:
       on-profile: local
   jpa:
+    open-in-view: false
+    defer-datasource-initialization: true
     properties:
       hibernate:
         format_sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     generate-ddl: true
     show-sql: true
   datasource:
