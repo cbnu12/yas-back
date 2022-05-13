@@ -2,6 +2,12 @@ spring:
   profiles:
     active: local
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      location: ./files/
+
 springdoc:
   version: '1.0.0'
   api-docs:
@@ -10,6 +16,9 @@ springdoc:
       enabled: true
   swagger-ui:
     operations-sorter: method
+
+server:
+  port: 8080
 
 ---
 spring:
@@ -50,8 +59,5 @@ spring:
     url: jdbc:mysql://localhost:3306/YAS
     username: root
     password: P@6985w0rd
-
-server:
-  port: 8080
 
 ---

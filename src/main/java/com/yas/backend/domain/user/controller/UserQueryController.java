@@ -26,7 +26,7 @@ public class UserQueryController extends BaseController {
     private final UserMapper userMapper;
 
     @GetMapping("users")
-    @Operation(summary = "사용자 조회 (Email, Nickname)", description = "Email(Optional) : Equals<br/>AND<br/>Nickname(Optional) : Like")
+    @Operation(summary = "사용자 조회", description = "조건 없는 경우 전체 조회, 조회조건 AND 조건으로 조회")
     public List<UserResponse> findByPredicate(@ParameterObject UserSearchRequest request) {
         List<UserDto> results = this.userQueryService.findByPredicate(request);
         return results.stream().map(UserResponse::from).toList();
