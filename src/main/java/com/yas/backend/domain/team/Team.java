@@ -1,5 +1,6 @@
 package com.yas.backend.domain.team;
 
+import com.yas.backend.domain.team.dto.TeamDto;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -20,6 +21,19 @@ public class Team {
     private Set<Long> userIds;
     private Boolean isActive;
     private LocalDateTime createdAt;
+
+    public static Team create(TeamDto teamDto) {
+        return Team.builder()
+                .id(teamDto.getId())
+                .name(teamDto.getName())
+                .maxUserCount(teamDto.getMaxUserCount())
+                .description(teamDto.getDescription())
+                .ownerId(teamDto.getOwnerId())
+                .userIds(teamDto.getUserIds())
+                .techStacks(teamDto.getTechStacks())
+                .createdAt(teamDto.getCreatedAt())
+                .build();
+    }
 
     public void deactivate() {
         this.isActive = Boolean.FALSE;
