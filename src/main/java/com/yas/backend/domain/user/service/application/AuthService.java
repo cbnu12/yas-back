@@ -4,7 +4,6 @@ import com.yas.backend.common.exception.PasswordFailOverException;
 import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.user.User;
 import com.yas.backend.domain.user.dto.AuthDto;
-import com.yas.backend.domain.user.dto.UserDto;
 import com.yas.backend.domain.user.mapper.UserMapper;
 import com.yas.backend.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,15 +16,17 @@ public class AuthService {
     private final UserMapper mapper;
 
     public boolean isValid(AuthDto authDto) {
-        UserDto dto = this.userService.findByEmail(authDto.email()).orElseThrow(UserNotFoundException::new);
-        User user = this.mapper.dtoToDomain(dto);
+        User user = this.userService.findByEmail(authDto.email())
+                .map(this.mapper::dtoToDomain)
+                .orElseThrow(UserNotFoundException::new);
 
         if (user.getSignInFailCount() > 5) throw new PasswordFailOverException();
 
         if (user.validatePassword(authDto.password())) return true;
-        user.increasePasswordFailCount();
 
-        this.userService.update(this.mapper.domainToDto(user));
+        user.increasePasswordFailCount();
+        this.userService.save(this.mapper.domainToDto(user));
+
         return false;
     }
 }

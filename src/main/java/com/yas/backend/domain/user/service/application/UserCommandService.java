@@ -18,20 +18,26 @@ public class UserCommandService {
     private final UserMapper mapper;
 
     public UserDto signUp(UserDto dto) {
-        User user = mapper.dtoToDomain(dto);
-        if (userService.findByEmail(dto.getEmail()).isPresent())
+        User user = this.mapper.dtoToDomain(dto);
+        if (this.userService.findByEmail(dto.getEmail()).isPresent())
             throw new InsertConflictException();
-        UserDto result = mapper.domainToDto(user);
+        UserDto result = this.mapper.domainToDto(user);
 
-        return userService.create(result);
+        return this.userService.save(result);
     }
 
     public UserDto updatePassword(Long id, UpdatePasswordRequest request) {
         User user = this.userService.findById(id).map(this.mapper::dtoToDomain).orElseThrow(UserNotFoundException::new);
         if (!user.validatePassword(request.oldPassword())) throw new PasswordNotMatchException();
         user.updatePassword(request.newPassword());
-        UserDto result = this.mapper.domainToDto(user);
 
-        return this.userService.update(result);
+        return this.userService.save(this.mapper.domainToDto(user));
+    }
+
+    public UserDto unRegister(Long id) {
+        User user = this.userService.findById(id).map(this.mapper::dtoToDomain).orElseThrow(UserNotFoundException::new);
+        user.unRegister();
+
+        return this.userService.save(this.mapper.domainToDto(user));
     }
 }

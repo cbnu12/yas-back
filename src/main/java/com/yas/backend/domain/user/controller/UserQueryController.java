@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Tag(name = "Users", description = "사용자 query API")
+@Tag(name = "Users", description = "사용자 API")
 @Slf4j
 @RestController
 @RequiredArgsConstructor

@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "Users", description = "사용자 query API")
+@Tag(name = "Users", description = "사용자 API")
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -43,5 +43,12 @@ public class UserCommandController extends BaseController {
     ) {
         UserDto dto = this.userCommandService.updatePassword(id, request);
         return dto.getPassword().equals(request.newPassword());
+    }
+
+    @DeleteMapping("user/{id}")
+    @Operation(summary = "사용자 회원탈퇴", description = "Soft Delete")
+    public Boolean unRegister(@PathVariable Long id) {
+        UserDto dto = this.userCommandService.unRegister(id);
+        return dto.isDeleted();
     }
 }

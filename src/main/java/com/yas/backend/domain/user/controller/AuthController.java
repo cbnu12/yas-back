@@ -4,12 +4,13 @@ import com.yas.backend.common.controller.BaseController;
 import com.yas.backend.domain.user.exchange.request.AuthRequest;
 import com.yas.backend.domain.user.exchange.response.AuthResponse;
 import com.yas.backend.domain.user.service.application.AuthService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Auth", description = "인증 Api")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping
 public class AuthController extends BaseController {
 
     private final AuthService authService;

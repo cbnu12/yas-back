@@ -20,6 +20,7 @@ public class UserDto {
     private boolean isActive;
     private LocalDateTime lastPasswordUpdateAt;
     private Integer signInFailCount;
+    private boolean isDeleted;
 
     private Integer birthYears;
     private Integer careerYears;

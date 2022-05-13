@@ -19,11 +19,10 @@ import java.util.Optional;
 @DynamicUpdate
 @Builder
 @Getter
-@Setter
 @Entity
+@Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
 public class UserEntity {
 
     @Id
@@ -76,6 +75,9 @@ public class UserEntity {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    @Column
+    private boolean isDeleted;
 
 
     public Optional<FileEntity> getProfileImage() {

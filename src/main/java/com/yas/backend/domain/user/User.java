@@ -20,6 +20,7 @@ public class User {
     private boolean isActive;
     private LocalDateTime lastPasswordUpdateAt;
     private Integer signInFailCount;
+    private boolean isDeleted;
 
     public int getBirthYear() {
         return LocalDate.now().getYear() - this.birth.getYear();
@@ -40,5 +41,9 @@ public class User {
     public void updatePassword(String password) {
         this.password = password;
         this.lastPasswordUpdateAt = LocalDateTime.now();
+    }
+
+    public void unRegister() {
+        this.isDeleted = false;
     }
 }
