@@ -3,7 +3,6 @@ package com.yas.backend.domain.team.service;
 import com.yas.backend.common.entity.TeamEntity;
 import com.yas.backend.common.exception.TeamNotFoundException;
 import com.yas.backend.common.exception.UserNotFoundException;
-import com.yas.backend.domain.team.Team;
 import com.yas.backend.domain.team.dto.TeamDto;
 import com.yas.backend.domain.team.mapper.TeamMapper;
 import com.yas.backend.domain.team.repository.TeamRepository;
@@ -41,12 +40,8 @@ public class TeamService {
     }
 
     @Transactional
-    public void remove(Long teamId) {
-        Team team = teamMapper.entityToDomain(teamRepository.findById(teamId)
-                .orElseThrow(TeamNotFoundException::new));
-
-        team.deactivate();
-
-        teamRepository.save(teamMapper.domainToEntity(team));
+    public TeamDto save(TeamDto teamDto) {
+        TeamEntity teamEntity = teamRepository.save(teamMapper.dtoToEntity(teamDto));
+        return teamMapper.entityToDto(teamEntity);
     }
 }

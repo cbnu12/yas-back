@@ -21,7 +21,7 @@ public class TeamCommandService {
 
     public Long create(final TeamDto teamDto) {
         try {
-            Team team = teamMapper.dtoToDomain(teamDto);
+            Team team = Team.create(teamDto);
             return teamService.create(teamMapper.domainToDto(team)).getId();
         } catch (UserNotFoundException e) {
             log.info(e.getMessage());
@@ -34,6 +34,8 @@ public class TeamCommandService {
     }
 
     public void remove(Long teamId) {
-        teamService.remove(teamId);
+        Team team = teamMapper.dtoToDomain(teamService.findById(teamId));
+        team.deactivate();
+        teamService.save(teamMapper.domainToDto(team));
     }
 }
