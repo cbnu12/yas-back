@@ -1,5 +1,6 @@
 package com.yas.backend.domain.user.exchange.response;
 
+import com.yas.backend.common.enums.FileConstant;
 import com.yas.backend.domain.user.dto.UserDto;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class UserResponse {
         return UserResponse.builder()
                 .email(dto.getEmail())
                 .nickname(dto.getNickname())
-                .profileImage(dto.getProfileImage())
+                .profileImage(dto.getProfileImage().isEmpty() ? FileConstant.DEFAULT_PROFILE_IMAGE.toString() : dto.getProfileImage())
                 .birthYear(dto.getBirthYears())
                 .careerYear(dto.getCareerYears())
                 .build();

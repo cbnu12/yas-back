@@ -13,6 +13,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @DynamicInsert
 @DynamicUpdate
@@ -76,4 +77,8 @@ public class UserEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+
+    public Optional<FileEntity> getProfileImage() {
+        return Optional.ofNullable(profileImage);
+    }
 }

@@ -1,5 +1,6 @@
 package com.yas.backend.domain.user.mapper;
 
+import com.yas.backend.common.entity.FileEntity;
 import com.yas.backend.common.entity.UserEntity;
 
 import com.yas.backend.domain.user.User;
@@ -14,7 +15,7 @@ public class UserMapper {
                 .email(entity.getEmail())
                 .password(entity.getPassword())
                 .nickname(entity.getNickname())
-                .profileImage(entity.getProfileImage().getFilePath())
+                .profileImage(entity.getProfileImage().map(FileEntity::getFilePath).orElse(""))
                 .birth(entity.getBirth())
                 .showsBirth(entity.isShowsBirth())
                 .careerStartAt(entity.getCareerStartAt())
