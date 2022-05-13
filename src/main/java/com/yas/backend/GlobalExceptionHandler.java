@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @RestControllerAdvice
@@ -23,7 +24,9 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception exception) {
-        log.error(exception.getClass().getName(), Arrays.toString(exception.getStackTrace()));
+        List<String> stackTraceElements = Arrays.stream(exception.getStackTrace()).map(StackTraceElement::toString).toList();
+        log.error(String.join("\n", stackTraceElements));
+
         String errorMessage = String.format("데이터 처리 중 오류가 발생하였습니다.%n%s", LocalDateTime.now());
         ErrorResponse response = new ErrorResponse(500, errorMessage);
         return new ResponseEntity<>(response, HttpStatus.valueOf(response.getHttpStatusCode()));
