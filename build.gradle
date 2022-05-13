@@ -32,6 +32,23 @@ dependencies {
 
     // Swagger
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.8'
+
+    // https://mvnrepository.com/artifact/com.querydsl/querydsl-jpa
+    implementation 'com.querydsl:querydsl-jpa:5.0.0'
+    annotationProcessor(
+            "javax.persistence:javax.persistence-api",
+            "javax.annotation:javax.annotation-api",
+            "com.querydsl:querydsl-apt:5.0.0:jpa")
+
+}
+
+// QueryDSL
+sourceSets {
+    main {
+        java {
+            srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
+        }
+    }
 }
 
 tasks.named('test') {

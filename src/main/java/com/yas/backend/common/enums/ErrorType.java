@@ -1,9 +1,10 @@
 package com.yas.backend.common.enums;
 
 public enum ErrorType {
-    NOT_FOUND_USER("User Not Found");
+    NOT_FOUND_USER("User Not Found"),
+    NOT_FOUND_TEAM("Team Not Found");
 
-    private String message;
+    private final String message;
 
     ErrorType(String message) {
         this.message = message;

@@ -1,11 +1,12 @@
 package com.yas.backend.domain.team.service;
 
 import com.yas.backend.domain.team.dto.TeamDto;
-import com.yas.backend.domain.team.mapper.TeamMapper;
-import com.yas.backend.domain.team.service.domainservice.TeamService;
+import com.yas.backend.domain.team.exchange.TeamSearchRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -13,8 +14,12 @@ import org.springframework.stereotype.Service;
 public class TeamSearchService {
 
     private final TeamService teamService;
-    private final TeamMapper teamMapper;
 
-    public TeamDto findTeamByName(TeamDto teamDto){return teamService.findByName(teamDto.name());}
+    public List<TeamDto> getTeams(TeamSearchRequest teamSearchRequest) {
+        return teamService.findTeams();
+    }
 
+    public TeamDto getTeam(Long teamId) {
+        return teamService.findById(teamId);
+    }
 }
