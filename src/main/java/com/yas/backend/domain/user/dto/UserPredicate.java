@@ -1,7 +1,6 @@
 package com.yas.backend.domain.user.dto;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Predicate;
 import com.yas.backend.common.entity.QUserEntity;
 
 
@@ -10,7 +9,7 @@ public class UserPredicate {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Predicate search(String email, String nickname) {
+    public static BooleanBuilder search(String email, String nickname) {
         QUserEntity user = QUserEntity.userEntity;
         BooleanBuilder builder = new BooleanBuilder();
 

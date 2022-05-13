@@ -1,15 +1,17 @@
 package com.yas.backend.domain.user.controller;
 
 import com.yas.backend.common.controller.BaseController;
-import com.yas.backend.common.exception.UserNotFoundException;
+import com.yas.backend.domain.user.dto.UserDto;
 import com.yas.backend.domain.user.exchange.request.UserSearchRequest;
 import com.yas.backend.domain.user.exchange.response.UserResponse;
 import com.yas.backend.domain.user.mapper.UserMapper;
-import com.yas.backend.domain.user.service.application.UserSearchService;
+import com.yas.backend.domain.user.service.application.UserQueryService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,22 +21,21 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class UserQueryController extends BaseController {
-    private final UserSearchService userSearchService;
+    private final UserQueryService userQueryService;
     private final UserMapper userMapper;
 
     @GetMapping("users")
-    public List<UserResponse> findAllActiveUser() {
-        return userSearchService.findAllActiveUser()
-                .stream().map(userMapper::dtoToResponse).toList();
+    @Operation(summary = "사용자 조회 (Email, Nickname)", description = "Email(Optional) : Equals<br/>AND<br/>Nickname(Optional) : Like")
+    public List<UserResponse> findByPredicate(UserSearchRequest request) {
+        List<UserDto> results = this.userQueryService.findByPredicate(request);
+        return results.stream().map(UserResponse::from).toList();
     }
 
-    @GetMapping("user")
-    public UserResponse findUserByEmail(UserSearchRequest request) {
-        try {
-            return userMapper.dtoToResponse(userSearchService.findUserByEmail(request.toDto()));
-        } catch (UserNotFoundException e) {
-            log.info(e.getMessage());
-            return UserResponse.empty();
-        }
+    @GetMapping("user/{id}")
+    @Operation(summary = "사용자 조회", description = "id를 기준으로 조회")
+    public UserResponse findById(@PathVariable Long id) {
+        UserDto result = this.userQueryService.findById(id);
+        return UserResponse.from(result);
     }
+
 }

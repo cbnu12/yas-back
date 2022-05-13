@@ -3,7 +3,6 @@ package com.yas.backend.domain.user.mapper;
 import com.yas.backend.common.entity.UserEntity;
 
 import com.yas.backend.domain.user.User;
-import com.yas.backend.domain.user.exchange.response.UserResponse;
 import com.yas.backend.domain.user.dto.UserDto;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +14,7 @@ public class UserMapper {
                 .email(entity.getEmail())
                 .password(entity.getPassword())
                 .nickname(entity.getNickname())
+                .profileImage(entity.getProfileImage().getFilePath())
                 .birth(entity.getBirth())
                 .showsBirth(entity.isShowsBirth())
                 .careerStartAt(entity.getCareerStartAt())
@@ -37,7 +37,6 @@ public class UserMapper {
                 .lastPasswordUpdateAt(dto.getLastPasswordUpdateAt())
                 .signInFailCount(dto.getSignInFailCount())
                 .build();
-
     }
 
     public User dtoToDomain(UserDto dto) {
@@ -46,6 +45,7 @@ public class UserMapper {
                 .email(dto.getEmail())
                 .password(dto.getPassword())
                 .nickname(dto.getNickname())
+                .profileImage(dto.getProfileImage())
                 .birth(dto.getBirth())
                 .showsBirth(dto.isShowsBirth())
                 .careerStartAt(dto.getCareerStartAt())
@@ -61,6 +61,7 @@ public class UserMapper {
                 .email(domain.getEmail())
                 .password(domain.getPassword())
                 .nickname(domain.getNickname())
+                .profileImage(domain.getProfileImage())
                 .birth(domain.getBirth())
                 .showsBirth(domain.isShowsBirth())
                 .careerStartAt(domain.getCareerStartAt())
@@ -72,14 +73,4 @@ public class UserMapper {
                 .careerYears(domain.getCareerYear())
                 .build();
     }
-
-    public UserResponse dtoToResponse(UserDto dto) {
-        return UserResponse.builder()
-                .email(dto.getEmail())
-                .nickname(dto.getNickname())
-                .birthYear(dto.getBirthYears())
-                .careerYear(dto.getCareerYears())
-                .build();
-    }
-
 }

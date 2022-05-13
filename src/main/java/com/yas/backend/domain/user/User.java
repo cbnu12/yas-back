@@ -13,6 +13,7 @@ public class User {
     private String email;
     private String password;
     private String nickname;
+    private String profileImage;
     private LocalDate birth;
     private boolean showsBirth;
     private LocalDate careerStartAt;
@@ -36,13 +37,8 @@ public class User {
         this.signInFailCount += 1;
     }
 
-    public boolean updatePassword(String password) {
-        // ToDo 패스워드 복잡도 체크 필요
-        boolean complexity = true;
-        if (complexity) {
-            this.password = password;
-            this.lastPasswordUpdateAt = LocalDateTime.now();
-        }
-        return complexity;
+    public void updatePassword(String password) {
+        this.password = password;
+        this.lastPasswordUpdateAt = LocalDateTime.now();
     }
 }

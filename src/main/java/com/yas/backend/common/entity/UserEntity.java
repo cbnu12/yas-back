@@ -38,6 +38,10 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String nickname;
 
+    @OneToOne
+    @JoinColumn
+    private FileEntity profileImage;
+
     @Column
     private LocalDate birth;
 
@@ -71,4 +75,5 @@ public class UserEntity {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
 }
