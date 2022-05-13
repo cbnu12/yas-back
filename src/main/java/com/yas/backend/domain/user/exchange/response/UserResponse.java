@@ -8,7 +8,6 @@ import lombok.Setter;
 
 @Builder
 @Getter
-@Setter
 public class UserResponse {
     private String email;
     private String nickname;
@@ -25,7 +24,7 @@ public class UserResponse {
                 .email(dto.getEmail())
                 .nickname(dto.getNickname())
                 .profileImage(dto.getProfileImage().isEmpty() ? FileConstant.DEFAULT_PROFILE_IMAGE.toString() : dto.getProfileImage())
-                .birthYear(dto.getBirthYears())
+                .birthYear(dto.isShowsBirth() ? dto.getBirthYears() : null)
                 .careerYear(dto.getCareerYears())
                 .build();
     }

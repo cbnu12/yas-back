@@ -28,8 +28,8 @@ public class UserCommandService {
 
     public UserDto updatePassword(Long id, UpdatePasswordRequest request) {
         User user = this.userService.findById(id).map(this.mapper::dtoToDomain).orElseThrow(UserNotFoundException::new);
-        if (!user.validatePassword(request.oldPassword())) throw new PasswordNotMatchException();
-        user.updatePassword(request.newPassword());
+        if (!user.validatePassword(request.getOldPassword())) throw new PasswordNotMatchException();
+        user.updatePassword(request.getNewPassword());
 
         return this.userService.save(this.mapper.domainToDto(user));
     }

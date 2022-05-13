@@ -42,7 +42,7 @@ public class UserCommandController extends BaseController {
             @RequestBody UpdatePasswordRequest request
     ) {
         UserDto dto = this.userCommandService.updatePassword(id, request);
-        return dto.getPassword().equals(request.newPassword());
+        return dto.getPassword().equals(request.getNewPassword());
     }
 
     @DeleteMapping("user/{id}")

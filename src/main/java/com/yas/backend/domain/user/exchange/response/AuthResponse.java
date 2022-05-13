@@ -1,6 +1,15 @@
 package com.yas.backend.domain.user.exchange.response;
 
-public record AuthResponse (
-        boolean isValid
-){
+
+import lombok.Data;
+import lombok.Getter;
+
+@Data
+@Getter
+public class AuthResponse {
+    boolean isValid;
+
+    public AuthResponse(boolean isValid) {
+        this.isValid = isValid;
+    }
 }

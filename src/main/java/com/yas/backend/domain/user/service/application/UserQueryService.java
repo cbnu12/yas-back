@@ -22,7 +22,7 @@ public class UserQueryService {
     private final UserMapper mapper;
 
     public List<UserDto> findByPredicate(UserSearchRequest request) {
-        BooleanBuilder predicate = UserPredicate.search(request.email(), request.nickname());
+        BooleanBuilder predicate = UserPredicate.search(request.getEmail(), request.getNickname());
         List<User> users = this.userService.findByPredicate(predicate).stream()
                 .map(this.mapper::dtoToDomain)
                 .toList();
