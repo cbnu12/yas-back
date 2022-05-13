@@ -1,4 +1,4 @@
-package com.yas.backend.domain.team.controller;
+package com.yas.backend.integration.domain.team;
 
 import com.yas.backend.common.values.Schedule;
 import com.yas.backend.config.InterceptorConfig;
@@ -44,7 +44,7 @@ class TeamCommandControllerTest {
 
     @Test
     @DisplayName("01. 팀 정상 생성")
-    void _01_teamCreateTest() throws Exception {
+    void _01_team_create_test() throws Exception {
         ResultActions result = mockMvc.perform(
                 post("/api/team")
                         .header(InterceptorConfig.X_USER_ID, "1")
@@ -60,8 +60,8 @@ class TeamCommandControllerTest {
     }
 
     @Test
-    @DisplayName("02. ownerId가 없는 id일 경우")
-    void _02_ownerIdIsNotExist() throws Exception {
+    @DisplayName("02.1. ownerId가 없는 id일 경우")
+    void _02_1_owner_id_is_not_exist() throws Exception {
         ResultActions result = mockMvc.perform(
                 post("/api/team")
                         .header(InterceptorConfig.X_USER_ID, "1")
@@ -72,12 +72,12 @@ class TeamCommandControllerTest {
         );
 
         result.andDo(print())
-                .andExpect(status().is5xxServerError());
+                .andExpect(status().is4xxClientError());
     }
 
     @Test
     @DisplayName("03. 팀 삭제 정상 처리")
-    void _03_teamRemoveTest() throws Exception {
+    void _03_team_remove_test() throws Exception {
         ResultActions result = mockMvc.perform(
                 delete("/api/team/"+1)
                         .header(InterceptorConfig.X_USER_ID, "1")
