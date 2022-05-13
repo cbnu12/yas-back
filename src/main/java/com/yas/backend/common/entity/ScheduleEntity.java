@@ -22,11 +22,14 @@ public class ScheduleEntity {
     @JoinColumn(name = "team_id")
     private TeamEntity team;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "place")
+    private String place;
 
-    @Column(name = "date_time")
-    private LocalDateTime dateTime;
+    @Column(name = "dayOfWeek")
+    private String dayOfWeek;
+
+    @Column(name = "time")
+    private String time;
 
     @CreatedBy
     @Column(updatable = false)
