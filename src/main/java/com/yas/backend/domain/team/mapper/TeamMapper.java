@@ -23,6 +23,7 @@ public class TeamMapper {
                 .id(teamDto.getId())
                 .name(teamDto.getName())
                 .maxUserCount(teamDto.getMaxUserCount())
+                .currentUserCount(teamDto.getCurrentUserCount())
                 .description(teamDto.getDescription())
                 .ownerId(teamDto.getOwnerId())
                 .userIds(teamDto.getUserIds())
@@ -47,6 +48,7 @@ public class TeamMapper {
                 .id(entity.getId())
                 .name(entity.getName())
                 .maxUserCount(entity.getMaxUserCount())
+                .currentUserCount(entity.getJoins().stream().filter(JoinEntity::getIsAlive).count())
                 .description(entity.getDescription())
                 .ownerId(entity.getOwner().getId())
                 .userIds(entity.getJoins().stream()
@@ -64,6 +66,7 @@ public class TeamMapper {
                 .description(entity.getDescription())
                 .ownerId(entity.getOwner().getId())
                 .maxUserCount(entity.getMaxUserCount())
+                .currentUserCount(entity.getJoins().stream().filter(JoinEntity::getIsAlive).count())
                 .topic(entity.getTopic().getName())
                 .techStacks(teamTechStackRepository.findByTeamId(entity.getId()).stream()
                         .map(TeamTechStackEntity::getTechStack)
@@ -82,20 +85,10 @@ public class TeamMapper {
                 .description(team.getDescription())
                 .ownerId(team.getOwnerId())
                 .maxUserCount(team.getMaxUserCount())
+                .currentUserCount(team.getCurrentUserCount())
                 .userIds(team.getUserIds())
                 .techStacks(team.getTechStacks())
                 .createdAt(team.getCreatedAt())
-                .build();
-    }
-
-    public TeamEntity domainToEntity(final Team team) {
-        return TeamEntity.builder()
-                .id(team.getId())
-                .name(team.getName())
-                .maxUserCount(team.getMaxUserCount())
-                .description(team.getDescription())
-                .owner(userRepository.findById(team.getOwnerId())
-                        .orElseThrow(UserNotFoundException::new))
                 .build();
     }
 }

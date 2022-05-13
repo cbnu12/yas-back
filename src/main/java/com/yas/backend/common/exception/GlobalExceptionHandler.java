@@ -32,6 +32,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception exception) {
         log.error(exception.getClass().getName(), exception.getMessage());
+        exception.printStackTrace();
         String errorMessage = String.format("데이터 처리 중 오류가 발생하였습니다.%n%s", LocalDateTime.now());
         ErrorResponse response = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), errorMessage);
         return new ResponseEntity<>(response, HttpStatus.valueOf(response.getHttpStatusCode()));

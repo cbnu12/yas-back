@@ -14,7 +14,8 @@ public class Team {
     private Long id;
     private String name;
     private String description;
-    private Integer maxUserCount;
+    private Long maxUserCount;
+    private Long currentUserCount;
     private Long ownerId;
     private String topic;
     private Set<String> techStacks;

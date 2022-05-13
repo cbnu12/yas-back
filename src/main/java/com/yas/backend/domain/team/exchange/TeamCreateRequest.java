@@ -16,7 +16,7 @@ public class TeamCreateRequest {
         private Long ownerId;
         private String name;
         private String description;
-        private Integer maxUserCount;
+        private Long maxUserCount;
         private String topic;
         private List<String> techStacks;
         private Schedule schedule;

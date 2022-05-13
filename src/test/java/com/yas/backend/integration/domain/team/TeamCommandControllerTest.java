@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("local")
-@DisplayName("Team API 테스트")
+@DisplayName("Team command API 테스트")
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class TeamCommandControllerTest {
     private MockMvc mockMvc;

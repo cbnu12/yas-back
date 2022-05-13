@@ -26,6 +26,9 @@ public class JoinEntity {
     @JoinColumn(name = "team_id")
     private TeamEntity team;
 
+    @Column
+    private Boolean isAlive;
+
     @CreatedBy
     @Column(updatable = false)
     private String createdBy;

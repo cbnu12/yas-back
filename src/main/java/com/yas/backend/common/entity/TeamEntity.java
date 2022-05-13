@@ -10,7 +10,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +30,7 @@ public class TeamEntity {
     private String name;
 
     @Column(name = "max_user_count", nullable = false)
-    private Integer maxUserCount;
+    private Long maxUserCount;
 
     @Column(name = "description", nullable = false)
     private String description;
@@ -48,7 +47,7 @@ public class TeamEntity {
 
     @ManyToMany
     @JoinTable(name = "team_techstack")
-    private Set<TechStackEntity> techStacks = new HashSet<>();
+    private Set<TechStackEntity> techStacks;
 
     @OneToOne
     private ScheduleEntity schedule;
