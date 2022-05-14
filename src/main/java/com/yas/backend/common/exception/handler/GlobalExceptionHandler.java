@@ -1,8 +1,12 @@
-package com.yas.backend.common.exception;
+package com.yas.backend.common.exception.handler;
 
+import com.yas.backend.common.exception.ErrorResponse;
+import com.yas.backend.common.exception.YasBaseException;
+import com.yas.backend.common.exception.YasDomainValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.validation.ValidationException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Slf4j
 @RestControllerAdvice
@@ -22,10 +27,18 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<ErrorResponse> handleException(ValidationException exception) {
+    public ResponseEntity<ErrorResponse> handleException(ValidationException exception, BindingResult bindingResult) {
         log.info(exception.getClass().getName(), exception.getMessage());
         log.info(Arrays.toString(exception.getStackTrace()));
-        ErrorResponse response = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase());
+        ErrorResponse response = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), Objects.requireNonNull(bindingResult.getFieldError()).getField());
+        return new ResponseEntity<>(response, HttpStatus.valueOf(response.getHttpStatusCode()));
+    }
+
+    @ExceptionHandler(YasDomainValidationException.class)
+    public ResponseEntity<ErrorResponse> handleException(YasDomainValidationException exception) {
+        log.info(exception.getClass().getName(), exception.getMessage());
+        log.info(Arrays.toString(exception.getStackTrace()));
+        ErrorResponse response = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.valueOf(response.getHttpStatusCode()));
     }
 
