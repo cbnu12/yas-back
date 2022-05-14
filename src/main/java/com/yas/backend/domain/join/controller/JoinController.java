@@ -1,31 +1,36 @@
 package com.yas.backend.domain.join.controller;
 
 import com.yas.backend.common.controller.BaseController;
+import com.yas.backend.common.enums.JoinStatus;
 import com.yas.backend.domain.join.data.mapper.JoinMapper;
-import com.yas.backend.domain.join.exchange.JoinRequest;
-import com.yas.backend.domain.join.exchange.JoinResponse;
-import com.yas.backend.domain.join.service.JoinService;
+import com.yas.backend.domain.join.dto.JoinDto;
+import com.yas.backend.domain.join.exchange.*;
+import com.yas.backend.domain.join.service.JoinCommandService;
+import com.yas.backend.domain.join.service.domainservice.JoinService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 public class JoinController extends BaseController {
-    private final JoinService joinService;
+    private final JoinCommandService joinCommandService;
     private final JoinMapper joinMapper;
 
-    @PostMapping("join")
-    public JoinResponse teamJoin(@RequestBody JoinRequest joinRequest){
-        return joinMapper.dtoToResponse(joinService.teamJoin(joinRequest.toDto()));
+
+    @PostMapping(value = "/team/join")
+    public JoinCreateResponse createJoin(@RequestBody final JoinCreateRequest request){
+        return JoinCreateResponse.of(joinCommandService.create(request.toDto()));
     }
 
-    @PutMapping("join")
-    public JoinResponse teamSecession(@RequestBody JoinRequest joinRequest){
-        return joinMapper.dtoToResponse(joinService.teamSecession(joinRequest.toDto()));
+    @PatchMapping(value = "/team/join/{joinId}/status")
+    public JoinAnswerResponse answerJoin(@RequestBody final JoinAnswerRequest request,@PathVariable("joinId") Long joinId){
+        return JoinAnswerResponse.of(joinCommandService.updateStatus(request.toDto(joinId)));
+    }
+
+    @DeleteMapping(value = "/team/join/{joinId}/status")
+    public JoinDeleteResponse deleteJoin(@PathVariable ("joinId") Long joinId){
+        return JoinDeleteResponse.of(joinCommandService.remove(joinId));
     }
 }

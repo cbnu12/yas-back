@@ -1,6 +1,7 @@
 package com.yas.backend.common.entity;
 
-import lombok.Getter;
+import com.yas.backend.common.enums.JoinStatus;
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -32,7 +33,10 @@ public class JoinEntity {
     private TeamEntity team;
 
     @Column
-    private boolean isActive;
+    private Boolean isAlive;
+
+    @Column
+    private JoinStatus status;
 
     @CreatedBy
     @Column(updatable = false)
