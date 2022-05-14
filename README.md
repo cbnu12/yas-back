@@ -7,6 +7,13 @@
 
 ## Description
 
+## How to start up
+0. docker & docker-compose 설치 (알아서)
+1. project directory에서 docker-compose start
+   1. ```{{project path}}/local-compose.yml up -d```
+   2. intellij 이용시 run configuration에 추가하여 사용가능
+2. application 실행 
+
 ## :raising_hand: Backers
 
 <a class="member-avatar" data-ga-click="Orgs, go to person, location:profile people module; text:username" data-hovercard-type="user" data-hovercard-url="/users/hgs6424/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="/hgs6424"><img class="avatar avatar-user" src="https://avatars.githubusercontent.com/u/20631334?s=70&amp;v=4" width="35" height="35" alt="@hgs6424"></a>

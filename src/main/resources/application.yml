@@ -32,14 +32,10 @@ spring:
     generate-ddl: true
     show-sql: true
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/yas-local;AUTO_SERVER=TRUE
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/YAS
+    username: root
+    password: 1234
 
 ---
 
