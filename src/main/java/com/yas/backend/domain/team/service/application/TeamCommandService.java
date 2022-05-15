@@ -27,10 +27,6 @@ public class TeamCommandService {
         }
     }
 
-    public TeamDto update(final TeamDto teamDto) {
-        return teamDto;
-    }
-
     public void remove(Long teamId) {
         Team team = teamMapper.dtoToDomain(teamService.findById(teamId));
         team.deactivate();
