@@ -57,6 +57,10 @@ public class JoinMapper {
                 .teamId(join.getTeamId())
                 .userId(join.getUserId())
                 .isAlive(join.getIsAlive())
+                .updatedAt(join.getUpdatedAt())
+                .updatedBy(join.getUpdatedBy())
+                .createdAt(join.getCreatedAt())
+                .createdBy(join.getCreatedBy())
                 .build();
     }
 

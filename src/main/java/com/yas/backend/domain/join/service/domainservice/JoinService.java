@@ -29,14 +29,9 @@ public class JoinService {
     private final UserMapper userMapper;
     private final TeamMapper teamMapper;
     public JoinDto save(JoinDto joinDto) throws UserNotFoundException, TeamNotFoundException {
-        joinDto.setCreatedAt(LocalDateTime.now());
         return joinMapper.entityToDto(joinRepository.save(joinMapper.dtoToEntity(joinDto)));
     }
 
-    public JoinDto update(JoinDto joinDto) throws UserNotFoundException, TeamNotFoundException {
-        joinDto.setUpdatedAt(LocalDateTime.now());
-        return joinMapper.entityToDto(joinRepository.save(joinMapper.dtoToEntity(joinDto)));
-    }
 
     public JoinDto findById(Long joinId){
         return joinMapper.entityToDto(joinRepository.findById(joinId).orElseThrow(JoinNotFoundException::new));

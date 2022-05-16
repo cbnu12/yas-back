@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ValidationException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @Service
@@ -32,7 +34,8 @@ public class JoinCommandService {
             }
             Join join= Join.create(joinDto);
             join.setStatus(JoinStatus.REQUEST);
-            join.setIsAlive(true);
+            join.deactivate(true);
+            join.setCreatedAt(LocalDateTime.now());
             return joinService.save(joinMapper.domainToDto(join)).getId();
 
         }catch (JoinAlreadyExistException | UserNotFoundException |TeamNotFoundException e){
@@ -44,14 +47,16 @@ public class JoinCommandService {
     public long updateStatus(JoinDto joinDto){
         Join join= Join.create(joinService.findById(joinDto.getId()));
         join.setStatus(joinDto.getStatus());
-        return joinService.update(joinMapper.domainToDto(join)).getId();
+        join.setUpdatedAt(LocalDateTime.now());
+        return joinService.save(joinMapper.domainToDto(join)).getId();
     }
 
     public Long remove(Long joinId){
         Join join= Join.create(joinService.findById(joinId));
         join.setStatus(JoinStatus.EXIT);
-        join.setIsAlive(false);
-        return joinService.update(joinMapper.domainToDto(join)).getId();
+        join.deactivate(false);
+        join.setUpdatedAt(LocalDateTime.now());
+        return joinService.save(joinMapper.domainToDto(join)).getId();
 
     }
 }

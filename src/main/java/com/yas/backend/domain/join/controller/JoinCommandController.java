@@ -1,12 +1,9 @@
 package com.yas.backend.domain.join.controller;
 
 import com.yas.backend.common.controller.BaseController;
-import com.yas.backend.common.enums.JoinStatus;
 import com.yas.backend.domain.join.data.mapper.JoinMapper;
-import com.yas.backend.domain.join.dto.JoinDto;
 import com.yas.backend.domain.join.exchange.*;
 import com.yas.backend.domain.join.service.JoinCommandService;
-import com.yas.backend.domain.join.service.domainservice.JoinService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class JoinController extends BaseController {
+public class JoinCommandController extends BaseController {
     private final JoinCommandService joinCommandService;
     private final JoinMapper joinMapper;
 

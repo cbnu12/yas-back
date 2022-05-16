@@ -16,8 +16,9 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Getter
-@Setter
 @Builder
 public class Join {
     private Long id;
@@ -43,5 +44,22 @@ public class Join {
                 .updatedAt(joinDto.getUpdatedAt())
                 .build();
 
+    }
+
+    public void setStatus(JoinStatus status){
+        this.status=status;
+    }
+    public void deactivate(Boolean isAlive){
+        this.isAlive=isAlive;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        updatedAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.updatedAt = updatedAt;
     }
 }
