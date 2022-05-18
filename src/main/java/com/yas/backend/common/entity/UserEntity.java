@@ -64,6 +64,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     private List<JoinEntity> joins;
 
+    @OneToMany(mappedBy = "user")
+    private List<InviteEntity> invite;
+
     @CreatedBy
     private String createdBy;
 

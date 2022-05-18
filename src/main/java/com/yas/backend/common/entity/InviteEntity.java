@@ -1,6 +1,5 @@
 package com.yas.backend.common.entity;
 
-import com.yas.backend.common.enums.JoinStatus;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,15 +9,14 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-
 @Builder
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "joins")
-public class JoinEntity {
+@Table(name = "invite")
+public class InviteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -33,10 +31,7 @@ public class JoinEntity {
     private TeamEntity team;
 
     @Column
-    private Boolean isAlive;
-
-    @Column
-    private JoinStatus status;
+    private boolean isActive;
 
     @CreatedBy
     @Column(updatable = false)
@@ -51,4 +46,6 @@ public class JoinEntity {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+
 }
