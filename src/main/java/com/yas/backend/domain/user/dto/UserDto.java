@@ -9,18 +9,19 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 public class UserDto {
+    private Long id;
     private String email;
-    private String nickname;
-    private Integer years;
-    private Integer careerYear;
     private String password;
+    private String nickname;
+    private String profileImage;
     private LocalDate birth;
     private boolean showsBirth;
     private LocalDate careerStartAt;
     private boolean isActive;
     private LocalDateTime lastPasswordUpdateAt;
-    private String createdBy;
-    private LocalDateTime createdAt;
-    private String updatedBy;
-    private LocalDateTime updatedAt;
+    private Integer signInFailCount;
+    private boolean isDeleted;
+
+    private Integer birthYears;
+    private Integer careerYears;
 }
