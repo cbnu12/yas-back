@@ -25,7 +25,7 @@ public class ScheduleEntity {
     @Column(name = "place")
     private String place;
 
-    @Column(name = "dayOfWeek")
+    @Column(name = "day_of_Week")
     private String dayOfWeek;
 
     @Column(name = "time")

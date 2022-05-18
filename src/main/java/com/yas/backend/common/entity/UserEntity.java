@@ -1,6 +1,9 @@
 package com.yas.backend.common.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -10,14 +13,16 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
+@DynamicInsert
+@DynamicUpdate
 @Builder
 @Getter
-@Setter
 @Entity
+@Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
 public class UserEntity {
 
     @Id
@@ -32,6 +37,10 @@ public class UserEntity {
 
     @Column(nullable = false, unique = true)
     private String nickname;
+
+    @OneToOne
+    @JoinColumn
+    private FileEntity profileImage;
 
     @Column
     private LocalDate birth;
@@ -48,6 +57,10 @@ public class UserEntity {
     @Column
     private LocalDateTime lastPasswordUpdateAt;
 
+    @Column
+    @ColumnDefault("0")
+    private Integer signInFailCount;
+
     @OneToMany(mappedBy = "user")
     private List<JoinEntity> joins;
 
@@ -55,11 +68,9 @@ public class UserEntity {
     private List<InviteEntity> invite;
 
     @CreatedBy
-    @Column(updatable = false)
     private String createdBy;
 
     @CreatedDate
-    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedBy
@@ -69,5 +80,10 @@ public class UserEntity {
     private LocalDateTime updatedAt;
 
     @Column
-    private int signInFailCount;
+    private boolean isDeleted;
+
+
+    public Optional<FileEntity> getProfileImage() {
+        return Optional.ofNullable(profileImage);
+    }
 }

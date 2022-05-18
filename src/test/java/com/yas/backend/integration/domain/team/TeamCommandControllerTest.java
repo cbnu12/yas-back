@@ -92,7 +92,7 @@ class TeamCommandControllerTest {
                 .ownerId(ownerId)
                 .name("테스트용 팀")
                 .description("테스트")
-                .maxUserCount(10)
+                .maxUserCount(10L)
                 .topic("테스트 토픽")
                 .techStacks(Lists.newArrayList("스프링", "자바"))
                 .schedule(Schedule.builder()

@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ValidationException;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -25,12 +23,8 @@ public class TeamCommandService {
             return teamService.create(teamMapper.domainToDto(team)).getId();
         } catch (UserNotFoundException e) {
             log.info(e.getMessage());
-            throw new ValidationException();
+            throw new UserNotFoundException();
         }
-    }
-
-    public TeamDto update(final TeamDto teamDto) {
-        return teamDto;
     }
 
     public void remove(Long teamId) {

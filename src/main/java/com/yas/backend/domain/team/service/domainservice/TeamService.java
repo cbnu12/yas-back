@@ -3,7 +3,6 @@ package com.yas.backend.domain.team.service;
 import com.querydsl.core.BooleanBuilder;
 import com.yas.backend.common.entity.TeamEntity;
 import com.yas.backend.common.exception.TeamNotFoundException;
-import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.team.dto.TeamDto;
 import com.yas.backend.domain.team.mapper.TeamMapper;
 import com.yas.backend.domain.team.repository.TeamRepository;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Slf4j
 @Service
@@ -31,7 +29,7 @@ public class TeamService {
     }
 
     @Transactional
-    public TeamDto create(TeamDto teamDto) throws UserNotFoundException {
+    public TeamDto create(TeamDto teamDto) {
         TeamEntity teamEntity = teamMapper.dtoToEntity(teamDto);
         return teamMapper.entityToDto(teamRepository.save(teamEntity));
     }

@@ -52,9 +52,6 @@ public class TeamEntity {
     @OneToOne
     private ScheduleEntity schedule;
 
-    @OneToMany(mappedBy = "team")
-    private List<JoiningConditionEntity> joiningConditions;
-
     @Column
     private boolean isActive;
 

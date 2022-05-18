@@ -1,36 +1,44 @@
 package com.yas.backend.common.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
+@Builder
 @Getter
 @Entity
-@Table(name = "joining_conditions")
-public class JoiningConditionEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "files")
+public class FileEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @Column(columnDefinition = "BINARY(16)", nullable = false)
+    private UUID id;
 
-    @Column(name = "condition")
-    private String condition;
+    @Column
+    private String filePath;
 
-    @ManyToOne
-    @JoinColumn(name = "team_id")
-    private TeamEntity team;
+    @Column
+    private String originFileName;
+
+    @Column
+    private LocalDate destructionDate;
 
     @CreatedBy
-    @Column(updatable = false)
     private String createdBy;
 
     @CreatedDate
-    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedBy

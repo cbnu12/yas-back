@@ -22,15 +22,11 @@ public class OpenApiConfig {
                 .contact(new Contact().name("강성조").url("강성조@yas.com"))
                 .license(new License().name("Apache License"));
 
-        SecurityScheme securityScheme = new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
-                .in(SecurityScheme.In.HEADER).name("Authorization");
-        SecurityScheme xUserIdScheme = new SecurityScheme().type(SecurityScheme.Type.APIKEY).in(SecurityScheme.In.HEADER)
-                .name("X-USER-ID");
-        SecurityRequirement securityRequirement = new SecurityRequirement().addList("bearerAuth").addList("X-USER-ID");
+        SecurityScheme xUserIdScheme = new SecurityScheme().type(SecurityScheme.Type.APIKEY).in(SecurityScheme.In.HEADER).name("X-USER-ID");
+        SecurityRequirement securityRequirement = new SecurityRequirement().addList("X-USER-ID");
 
         return new OpenAPI()
-                .components(new Components().addSecuritySchemes("bearerAuth", securityScheme)
-                        .addSecuritySchemes("X-USER-ID", xUserIdScheme))
+                .components(new Components().addSecuritySchemes("X-USER-ID", xUserIdScheme))
                 .security(List.of(securityRequirement))
                 .info(info);
     }
