@@ -1,10 +1,12 @@
 package com.yas.backend.common.values;
 
+import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
 @Getter
+@Builder
 public class Schedule {
-    private LocalDateTime dateTime;
+    private String place;
+    private String dayOfWeek;
+    private String time;
 }

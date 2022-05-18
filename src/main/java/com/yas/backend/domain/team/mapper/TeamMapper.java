@@ -1,91 +1,94 @@
 package com.yas.backend.domain.team.mapper;
 
 import com.yas.backend.common.entity.*;
-import com.yas.backend.common.enums.MeetingMethod;
 import com.yas.backend.common.exception.UserNotFoundException;
-import com.yas.backend.common.values.Schedule;
 import com.yas.backend.domain.team.Team;
 import com.yas.backend.domain.team.dto.TeamDto;
+import com.yas.backend.domain.team.repository.TeamTechStackRepository;
 import com.yas.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.DayOfWeek;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class TeamMapper {
 
     private final UserRepository userRepository;
+    private final TeamTechStackRepository teamTechStackRepository;
 
     public Team dtoToDomain(final TeamDto teamDto) {
         return Team.builder()
-                .id(teamDto.id())
-                .name(teamDto.name())
-                .meetingMethod(MeetingMethod.valueOf(teamDto.meetingMethod()))
-                .totalUserCount(teamDto.totalUserCount())
-                .description(teamDto.description())
-                .ownerId(teamDto.ownerId())
-                .userIds(teamDto.userIds())
-                .hashtags(teamDto.hashtags())
-                .techStacks(teamDto.techStacks())
-                .joiningCondition(teamDto.joiningCondition())
-                .createdAt(teamDto.createdAt())
+                .id(teamDto.getId())
+                .name(teamDto.getName())
+                .maxUserCount(teamDto.getMaxUserCount())
+                .currentUserCount(teamDto.getCurrentUserCount())
+                .description(teamDto.getDescription())
+                .ownerId(teamDto.getOwnerId())
+                .userIds(teamDto.getUserIds())
+                .techStacks(teamDto.getTechStacks())
+                .createdAt(teamDto.getCreatedAt())
                 .build();
     }
 
     public TeamEntity dtoToEntity(final TeamDto teamDto) {
         return TeamEntity.builder()
-                .id(teamDto.id())
-                .name(teamDto.name())
-                .meetingMethod(MeetingMethod.valueOf(teamDto.meetingMethod()))
-                .totalUserCount(teamDto.totalUserCount())
-                .description(teamDto.description())
-                .owner(userRepository.findById(teamDto.ownerId())
+                .id(teamDto.getId())
+                .name(teamDto.getName())
+                .maxUserCount(teamDto.getMaxUserCount())
+                .description(teamDto.getDescription())
+                .owner(userRepository.findById(teamDto.getOwnerId())
                         .orElseThrow(UserNotFoundException::new))
                 .build();
     }
 
-    public TeamDto entityToDto(final TeamEntity teamEntity) {
-        return new TeamDto(
-                teamEntity.getId(),
-                teamEntity.getName(),
-                teamEntity.getMeetingMethod().name(),
-                teamEntity.getTotalUserCount(),
-                teamEntity.getDescription(),
-                teamEntity.getOwner().getId(),
-                teamEntity.getJoins().stream().map(JoinEntity::getUser).map(UserEntity::getId).toList(),
-                teamEntity.getHashtags().stream().map(HashtagEntity::getName).toList(),
-                teamEntity.getTechStacks().stream().map(TechStackEntity::getName).toList(),
-                teamEntity.getJoiningConditions().stream().map(JoiningConditionEntity::getCondition).toList(),
-                makeMeetingCycleToString(teamEntity.getSchedulePolicy()),
-                teamEntity.getSchedules().stream().map(ScheduleEntity::getDateTime).toList(),
-                teamEntity.getCreatedAt()
-                );
+    public TeamDto entityToDto(final TeamEntity entity) {
+        return TeamDto.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .maxUserCount(entity.getMaxUserCount())
+                .currentUserCount(entity.getJoins().stream().filter(JoinEntity::getIsAlive).count())
+                .description(entity.getDescription())
+                .ownerId(entity.getOwner().getId())
+                .userIds(entity.getJoins().stream()
+                        .map(JoinEntity::getUser)
+                        .map(UserEntity::getId)
+                        .collect(Collectors.toSet()))
+                .createdAt(entity.getCreatedAt())
+                .build();
+    }
+
+    public Team entityToDomain(final TeamEntity entity) {
+        return Team.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .ownerId(entity.getOwner().getId())
+                .maxUserCount(entity.getMaxUserCount())
+                .currentUserCount(entity.getJoins().stream().filter(JoinEntity::getIsAlive).count())
+                .topic(entity.getTopic().getName())
+                .techStacks(teamTechStackRepository.findByTeamId(entity.getId()).stream()
+                        .map(TeamTechStackEntity::getTechStack)
+                        .map(TechStackEntity::getName)
+                        .collect(Collectors.toSet()))
+                .isActive(entity.isActive())
+                .createdAt(entity.getCreatedAt())
+                .build();
     }
 
 
-    public TeamDto domainToDto(Team team) {
-        return new TeamDto(
-                team.getId(),
-                team.getName(),
-                team.getMeetingMethod().name(),
-                team.getTotalUserCount(),
-                team.getDescription(),
-                team.getOwnerId(),
-                team.getUserIds(),
-                team.getHashtags(),
-                team.getTechStacks(),
-                team.getJoiningCondition(),
-                team.getSchedulePolicy().toString(),
-                team.getMeetingSchedules().stream().map(Schedule::getDateTime).toList(),
-                team.getCreatedAt()
-        );
-    }
-
-    private String makeMeetingCycleToString(SchedulePolicyEntity schedulePolicyEntity) {
-        return schedulePolicyEntity.getMeetingCycle() + " "
-                + schedulePolicyEntity.getTimes() + "회, "
-                + DayOfWeek.of(schedulePolicyEntity.getDayOfWeek()).name();
+    public TeamDto domainToDto(final Team team) {
+        return TeamDto.builder()
+                .id(team.getId())
+                .name(team.getName())
+                .description(team.getDescription())
+                .ownerId(team.getOwnerId())
+                .maxUserCount(team.getMaxUserCount())
+                .currentUserCount(team.getCurrentUserCount())
+                .userIds(team.getUserIds())
+                .techStacks(team.getTechStacks())
+                .createdAt(team.getCreatedAt())
+                .build();
     }
 }

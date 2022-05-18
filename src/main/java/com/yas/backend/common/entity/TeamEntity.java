@@ -1,7 +1,8 @@
 package com.yas.backend.common.entity;
 
-import com.yas.backend.common.enums.MeetingMethod;
+import com.google.common.collect.Lists;
 import lombok.*;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -10,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -27,11 +29,8 @@ public class TeamEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "meeting_method", nullable = false)
-    private MeetingMethod meetingMethod;
-
-    @Column(name = "total_user_count", nullable = false)
-    private Integer totalUserCount;
+    @Column(name = "max_user_count", nullable = false)
+    private Long maxUserCount;
 
     @Column(name = "description", nullable = false)
     private String description;
@@ -42,22 +41,19 @@ public class TeamEntity {
     @OneToMany(mappedBy = "team")
     private List<JoinEntity> joins;
 
-    @OneToMany
-    @JoinColumn(name = "hashtag_id")
-    private List<HashtagEntity> hashtags;
+    @ManyToOne
+    @JoinColumn(name = "topic")
+    private TechStackEntity topic;
 
-    @OneToMany
-    @JoinColumn(name = "tech_stack_id")
-    private List<TechStackEntity> techStacks;
+    @ManyToMany
+    @JoinTable(name = "team_techstack")
+    private Set<TechStackEntity> techStacks;
 
     @OneToOne
-    private SchedulePolicyEntity schedulePolicy;
+    private ScheduleEntity schedule;
 
-    @OneToMany(mappedBy = "team")
-    private List<ScheduleEntity> schedules;
-
-    @OneToMany(mappedBy = "team")
-    private List<JoiningConditionEntity> joiningConditions;
+    @Column
+    private boolean isActive;
 
     @CreatedBy
     @Column(updatable = false)
@@ -72,4 +68,12 @@ public class TeamEntity {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    public List<JoinEntity> getJoins() {
+        if(CollectionUtils.isEmpty(this.joins)) {
+            return Lists.newArrayList();
+        }
+
+        return this.joins;
+    }
 }

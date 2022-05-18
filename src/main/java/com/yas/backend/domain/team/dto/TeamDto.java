@@ -1,20 +1,26 @@
 package com.yas.backend.domain.team.dto;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-public record TeamDto (
-        Long id,
-        String name,
-        String meetingMethod,
-        Integer totalUserCount,
-        String description,
-        Long ownerId,
-        List<Long> userIds,
-        List<String> hashtags,
-        List<String> techStacks,
-        List<String> joiningCondition,
-        String schedulePolicy,
-        List<LocalDateTime> meetingSchedules,
-        LocalDateTime createdAt
-) {}
+import java.time.LocalDateTime;
+import java.util.Set;
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class TeamDto {
+        private Long id;
+        private String name;
+        private String description;
+        private Long maxUserCount;
+        private Long currentUserCount;
+        private Long ownerId;
+        private String topic;
+        private Set<String> techStacks;
+        private Set<Long> userIds;
+        private LocalDateTime createdAt;
+}
