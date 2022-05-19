@@ -1,10 +1,11 @@
-package com.yas.backend.domain.team.service;
+package com.yas.backend.domain.team.service.applicationservice;
 
 import com.querydsl.core.BooleanBuilder;
 import com.yas.backend.domain.team.dto.TeamDto;
 import com.yas.backend.domain.team.dto.TeamPredicate;
 import com.yas.backend.domain.team.exchange.TeamSearchRequest;
 import com.yas.backend.domain.team.mapper.TeamMapper;
+import com.yas.backend.domain.team.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

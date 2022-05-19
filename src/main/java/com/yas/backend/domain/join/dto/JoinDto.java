@@ -1,13 +1,8 @@
 package com.yas.backend.domain.join.dto;
 
-import com.yas.backend.common.entity.TeamEntity;
-import com.yas.backend.common.entity.UserEntity;
 import com.yas.backend.common.enums.JoinStatus;
-import com.yas.backend.domain.team.dto.TeamDto;
-import com.yas.backend.domain.user.dto.UserDto;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -24,4 +19,16 @@ public class JoinDto {
     private JoinStatus status;
     private Boolean isAlive;
 
+    public static JoinDto newAcceptJoin(Long userId, Long teamId) {
+        return JoinDto.builder()
+                .userId(userId)
+                .teamId(teamId)
+                .status(JoinStatus.ACCEPT)
+                .isAlive(Boolean.TRUE)
+                .createdBy(String.valueOf(userId))
+                .createdAt(LocalDateTime.now())
+                .updatedBy(String.valueOf(userId))
+                .updatedAt(LocalDateTime.now())
+                .build();
+    }
 }

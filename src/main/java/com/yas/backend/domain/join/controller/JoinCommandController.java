@@ -3,7 +3,7 @@ package com.yas.backend.domain.join.controller;
 import com.yas.backend.common.controller.BaseController;
 import com.yas.backend.domain.join.data.mapper.JoinMapper;
 import com.yas.backend.domain.join.exchange.*;
-import com.yas.backend.domain.join.service.JoinCommandService;
+import com.yas.backend.domain.join.service.applicationservice.JoinCommandService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

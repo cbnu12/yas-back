@@ -5,10 +5,7 @@ import com.yas.backend.common.exception.TeamNotFoundException;
 import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.join.Join;
 import com.yas.backend.domain.join.dto.JoinDto;
-import com.yas.backend.domain.join.exchange.JoinCreateResponse;
-import com.yas.backend.domain.team.mapper.TeamMapper;
 import com.yas.backend.domain.team.repository.TeamRepository;
-import com.yas.backend.domain.user.data.mapper.UserMapper;
 import com.yas.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,11 +13,11 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class JoinMapper {
-    private final UserMapper userMapper;
-    private final TeamMapper teamMapper;
+
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;
-    public JoinEntity dtoToEntity(JoinDto dto){
+
+    public JoinEntity dtoToEntity(JoinDto dto) {
         return JoinEntity.builder()
                 .id(dto.getId())
                 .status(dto.getStatus())
@@ -36,7 +33,7 @@ public class JoinMapper {
                 .build();
     }
 
-    public JoinDto entityToDto(JoinEntity entity){
+    public JoinDto entityToDto(JoinEntity entity) {
         return JoinDto.builder()
                 .id(entity.getId())
                 .status(entity.getStatus())
@@ -50,7 +47,7 @@ public class JoinMapper {
                 .build();
     }
 
-    public JoinDto domainToDto(Join join){
+    public JoinDto domainToDto(Join join) {
         return JoinDto.builder()
                 .id(join.getId())
                 .status(join.getStatus())
@@ -64,4 +61,17 @@ public class JoinMapper {
                 .build();
     }
 
+    public Join dtoToDomain(JoinDto joinDto) {
+        return Join.builder()
+                .id(joinDto.getId())
+                .status(joinDto.getStatus())
+                .teamId(joinDto.getTeamId())
+                .userId(joinDto.getUserId())
+                .isAlive(joinDto.getIsAlive())
+                .updatedAt(joinDto.getUpdatedAt())
+                .updatedBy(joinDto.getUpdatedBy())
+                .createdAt(joinDto.getCreatedAt())
+                .createdBy(joinDto.getCreatedBy())
+                .build();
+    }
 }

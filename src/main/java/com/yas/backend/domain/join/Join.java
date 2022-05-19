@@ -1,20 +1,10 @@
 package com.yas.backend.domain.join;
 
-import com.yas.backend.common.entity.TeamEntity;
-import com.yas.backend.common.entity.UserEntity;
 import com.yas.backend.common.enums.JoinStatus;
 import com.yas.backend.domain.join.dto.JoinDto;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -31,7 +21,7 @@ public class Join {
     private String updatedBy;
     private LocalDateTime updatedAt;
 
-    public static Join create(JoinDto joinDto){
+    public static Join create(JoinDto joinDto) {
         return Join.builder()
                 .id(joinDto.getId())
                 .userId(joinDto.getUserId())
@@ -46,11 +36,16 @@ public class Join {
 
     }
 
-    public void setStatus(JoinStatus status){
-        this.status=status;
+    public void setStatus(JoinStatus status) {
+        this.status = status;
     }
-    public void deactivate(Boolean isAlive){
-        this.isAlive=isAlive;
+
+    public void deactivate() {
+        this.isAlive = Boolean.FALSE;
+    }
+
+    public void activate() {
+        this.isAlive = Boolean.TRUE;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
