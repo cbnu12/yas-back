@@ -5,10 +5,7 @@ import com.yas.backend.common.exception.TeamNotFoundException;
 import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.join.Join;
 import com.yas.backend.domain.join.dto.JoinDto;
-import com.yas.backend.domain.join.exchange.JoinCreateResponse;
-import com.yas.backend.domain.team.mapper.TeamMapper;
 import com.yas.backend.domain.team.repository.TeamRepository;
-import com.yas.backend.domain.user.data.mapper.UserMapper;
 import com.yas.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,8 +13,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class JoinMapper {
-    private final UserMapper userMapper;
-    private final TeamMapper teamMapper;
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;
     public JoinEntity dtoToEntity(JoinDto dto){

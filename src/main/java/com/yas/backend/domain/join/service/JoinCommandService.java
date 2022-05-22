@@ -8,15 +8,12 @@ import com.yas.backend.domain.join.Join;
 import com.yas.backend.domain.join.data.mapper.JoinMapper;
 import com.yas.backend.domain.join.dto.JoinDto;
 import com.yas.backend.domain.join.service.domainservice.JoinService;
-import com.yas.backend.domain.team.dto.TeamDto;
-import com.yas.backend.domain.user.data.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ValidationException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @Service
@@ -24,8 +21,6 @@ import java.time.format.DateTimeFormatter;
 public class JoinCommandService {
     private final JoinMapper joinMapper;
     private final JoinService joinService;
-
-    private final UserMapper userMapper;
 
     public Long create(final JoinDto joinDto){
         try {
