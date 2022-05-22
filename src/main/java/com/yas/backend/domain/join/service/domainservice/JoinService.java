@@ -9,15 +9,11 @@ import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.join.data.mapper.JoinMapper;
 import com.yas.backend.domain.join.dto.JoinDto;
 import com.yas.backend.domain.join.repository.JoinRepository;
-import com.yas.backend.domain.team.dto.TeamDto;
 import com.yas.backend.domain.team.mapper.TeamMapper;
-import com.yas.backend.domain.user.data.mapper.UserMapper;
-import com.yas.backend.domain.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 
 @Slf4j
 @Service
@@ -26,8 +22,6 @@ public class JoinService {
     private final JoinMapper joinMapper;
     private final JoinRepository joinRepository;
 
-    private final UserMapper userMapper;
-    private final TeamMapper teamMapper;
     public JoinDto save(JoinDto joinDto) throws UserNotFoundException, TeamNotFoundException {
         return joinMapper.entityToDto(joinRepository.save(joinMapper.dtoToEntity(joinDto)));
     }

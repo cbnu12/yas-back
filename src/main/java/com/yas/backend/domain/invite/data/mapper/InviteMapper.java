@@ -4,7 +4,7 @@ import com.yas.backend.common.entity.InviteEntity;
 import com.yas.backend.domain.invite.dto.InviteDto;
 import com.yas.backend.domain.invite.exchange.InviteResponse;
 import com.yas.backend.domain.team.mapper.TeamMapper;
-import com.yas.backend.domain.user.data.mapper.UserMapper;
+import com.yas.backend.domain.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
