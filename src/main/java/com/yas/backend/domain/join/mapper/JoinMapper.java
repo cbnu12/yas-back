@@ -1,4 +1,4 @@
-package com.yas.backend.domain.join.data.mapper;
+package com.yas.backend.domain.join.mapper;
 
 import com.yas.backend.common.entity.JoinEntity;
 import com.yas.backend.common.exception.TeamNotFoundException;
@@ -54,8 +54,6 @@ public class JoinMapper {
                 .teamId(join.getTeamId())
                 .userId(join.getUserId())
                 .isAlive(join.getIsAlive())
-                .updatedAt(join.getUpdatedAt())
-                .updatedBy(join.getUpdatedBy())
                 .createdAt(join.getCreatedAt())
                 .createdBy(join.getCreatedBy())
                 .build();
@@ -68,8 +66,6 @@ public class JoinMapper {
                 .teamId(joinDto.getTeamId())
                 .userId(joinDto.getUserId())
                 .isAlive(joinDto.getIsAlive())
-                .updatedAt(joinDto.getUpdatedAt())
-                .updatedBy(joinDto.getUpdatedBy())
                 .createdAt(joinDto.getCreatedAt())
                 .createdBy(joinDto.getCreatedBy())
                 .build();

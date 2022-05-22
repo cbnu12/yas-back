@@ -18,7 +18,7 @@ public class InviteController {
     private final InviteMapper inviteMapper;
 
     @PostMapping("invite")
-    public InviteResponse teamInvite(@RequestBody InviteRequest inviteRequest){
+    public InviteResponse teamInvite(@RequestBody InviteRequest inviteRequest) {
         return inviteMapper.dtoToResponse(inviteService.teamInvite(inviteRequest.toDto()));
     }
 }

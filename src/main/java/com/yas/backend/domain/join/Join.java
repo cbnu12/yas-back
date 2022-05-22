@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Getter
 @Builder
@@ -18,10 +17,8 @@ public class Join {
     private JoinStatus status;
     private String createdBy;
     private LocalDateTime createdAt;
-    private String updatedBy;
-    private LocalDateTime updatedAt;
 
-    public static Join create(JoinDto joinDto) {
+    private static Join create(JoinDto joinDto) {
         return Join.builder()
                 .id(joinDto.getId())
                 .userId(joinDto.getUserId())
@@ -30,14 +27,31 @@ public class Join {
                 .status(joinDto.getStatus())
                 .createdBy(joinDto.getCreatedBy())
                 .createdAt(joinDto.getCreatedAt())
-                .updatedBy(joinDto.getUpdatedBy())
-                .updatedAt(joinDto.getUpdatedAt())
                 .build();
 
     }
 
+    public static Join createForOwner(JoinDto joinDto) {
+        Join result = Join.create(joinDto);
+        result.setStatus(JoinStatus.ACCEPT);
+        result.activate();
+        return result;
+    }
+
+    public static Join createAsRequest(JoinDto joinDto) {
+        Join result = Join.create(joinDto);
+        result.setStatus(JoinStatus.REQUEST);
+        result.activate();
+        return result;
+    }
+
     public void setStatus(JoinStatus status) {
         this.status = status;
+    }
+
+    public void quit() {
+        deactivate();
+        this.status = JoinStatus.QUIT;
     }
 
     public void deactivate() {
@@ -49,12 +63,6 @@ public class Join {
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
-        createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        updatedAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        this.updatedAt = updatedAt;
     }
 }

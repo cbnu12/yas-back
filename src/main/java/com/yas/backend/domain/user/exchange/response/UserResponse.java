@@ -4,7 +4,6 @@ import com.yas.backend.common.enums.FileConstant;
 import com.yas.backend.domain.user.dto.UserDto;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Builder
 @Getter

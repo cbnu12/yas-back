@@ -19,7 +19,7 @@ public class JoinDto {
     private JoinStatus status;
     private Boolean isAlive;
 
-    public static JoinDto newAcceptJoin(Long userId, Long teamId) {
+    public static JoinDto ofAccepted(Long userId, Long teamId) {
         return JoinDto.builder()
                 .userId(userId)
                 .teamId(teamId)

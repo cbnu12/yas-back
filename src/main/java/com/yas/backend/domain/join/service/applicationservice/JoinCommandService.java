@@ -1,20 +1,18 @@
 package com.yas.backend.domain.join.service.applicationservice;
 
-import com.yas.backend.common.enums.JoinStatus;
 import com.yas.backend.common.exception.JoinAlreadyExistException;
 import com.yas.backend.common.exception.TeamNotFoundException;
 import com.yas.backend.common.exception.UserNotFoundException;
+import com.yas.backend.common.exception.YasDomainValidationException;
 import com.yas.backend.domain.join.Join;
-import com.yas.backend.domain.join.data.mapper.JoinMapper;
 import com.yas.backend.domain.join.dto.JoinDto;
+import com.yas.backend.domain.join.mapper.JoinMapper;
 import com.yas.backend.domain.join.service.JoinService;
-import com.yas.backend.domain.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ValidationException;
-import java.time.LocalDateTime;
+import javax.transaction.Transactional;
 
 @Slf4j
 @Service
@@ -23,38 +21,35 @@ public class JoinCommandService {
     private final JoinMapper joinMapper;
     private final JoinService joinService;
 
-    private final UserMapper userMapper;
-
+    @Transactional
     public Long create(final JoinDto joinDto) {
         try {
             if (joinService.isExist(joinDto)) {
                 throw new JoinAlreadyExistException();
             }
-            Join join = Join.create(joinDto);
-            join.setStatus(JoinStatus.REQUEST);
-            join.activate();
-            join.setCreatedAt(LocalDateTime.now());
+
+            Join join = Join.createAsRequest(joinDto);
+
             return joinService.save(joinMapper.domainToDto(join)).getId();
 
         } catch (JoinAlreadyExistException | UserNotFoundException | TeamNotFoundException e) {
             log.info(e.getMessage());
-            throw new ValidationException();
+            throw new YasDomainValidationException(e.getMessage());
         }
     }
 
-    public long updateStatus(JoinDto joinDto) {
-        Join join = Join.create(joinService.findById(joinDto.getId()));
+    @Transactional
+    public void updateStatus(JoinDto joinDto) {
+        Join join = joinMapper.dtoToDomain(joinService.findById(joinDto.getId()));
         join.setStatus(joinDto.getStatus());
-        join.setUpdatedAt(LocalDateTime.now());
-        return joinService.save(joinMapper.domainToDto(join)).getId();
+        joinService.save(joinMapper.domainToDto(join));
     }
 
-    public Long remove(Long joinId) {
-        Join join = Join.create(joinService.findById(joinId));
-        join.setStatus(JoinStatus.EXIT);
-        join.deactivate();
-        join.setUpdatedAt(LocalDateTime.now());
-        return joinService.save(joinMapper.domainToDto(join)).getId();
+    @Transactional
+    public void remove(Long joinId) {
+        Join join = joinMapper.dtoToDomain(joinService.findById(joinId));
+        join.quit();
+        joinService.save(joinMapper.domainToDto(join));
 
     }
 }

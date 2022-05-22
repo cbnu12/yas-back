@@ -28,7 +28,7 @@ public class UserSessionInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) {
         String rawUserId = request.getHeader(InterceptorConfig.X_USER_ID);
 
-        if(StringUtils.isBlank(rawUserId)) {
+        if (StringUtils.isBlank(rawUserId)) {
             return false;
         }
 
