@@ -4,10 +4,11 @@ public enum ErrorType {
     INSERT_CONFLICT("Data Already Exists"),
     NOT_FOUND_USER("User Not Found"),
     NOT_FOUND_TEAM("Team Not Found"),
-
     NOT_FOUND_JOIN("Join Not Found"),
 
-    JOIN_ALREADY_EXIST("Join Already Exist");
+    NOT_FOUND_INVITATION("Invitation Not Found"),
+    JOIN_ALREADY_EXIST("Join Already Exist"),
+    INVITATION_ALREADY_EXIST("Invitation Already Exist");
 
     private final String message;
 

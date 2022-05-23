@@ -1,5 +1,6 @@
 package com.yas.backend.common.entity;
 
+import com.yas.backend.common.enums.InvitationStatus;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,8 +16,8 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "invite")
-public class InviteEntity {
+@Table(name = "invitation")
+public class InvitationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -31,7 +32,10 @@ public class InviteEntity {
     private TeamEntity team;
 
     @Column
-    private boolean isActive;
+    private Boolean isAlive;
+
+    @Column
+    private InvitationStatus status;
 
     @CreatedBy
     @Column(updatable = false)
