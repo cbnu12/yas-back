@@ -9,7 +9,7 @@ import com.yas.backend.domain.join.data.mapper.JoinMapper;
 import com.yas.backend.domain.join.dto.JoinDto;
 import com.yas.backend.domain.join.service.domainservice.JoinService;
 import com.yas.backend.domain.team.dto.TeamDto;
-import com.yas.backend.domain.user.data.mapper.UserMapper;
+import com.yas.backend.domain.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
