@@ -29,7 +29,7 @@ public class UserSessionInterceptor implements HandlerInterceptor {
         String rawUserId = request.getHeader(InterceptorConfig.X_USER_ID);
 
         if(StringUtils.isBlank(rawUserId)) {
-            return false;
+            throw new UserNotFoundException();
         }
 
         try {
