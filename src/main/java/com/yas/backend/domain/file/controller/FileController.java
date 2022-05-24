@@ -22,13 +22,13 @@ import java.time.LocalDate;
 public class FileController extends BaseController {
     private final StorageService storageService;
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "파일 업로드", description = "Multipart/form")
     public String upload(@RequestBody MultipartFile file) {
         return this.storageService.store(file, "common", LocalDate.now().plusDays(5));
     }
 
-    @GetMapping("{id}")
+    @GetMapping("file/{id}")
     @Operation(summary = "파일 다운로드")
     public ResponseEntity<Resource> download(@PathVariable("id") String id) {
         Resource file = this.storageService.loadAsResource(id);
