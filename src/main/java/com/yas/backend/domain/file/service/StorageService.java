@@ -9,5 +9,5 @@ import java.time.LocalDate;
 
 public interface StorageService {
     String store(MultipartFile file, String additionalPath, LocalDate destructionDate) throws DirectoryCreateFailException, FileCreateFailException;
-    Resource loadAsResource(String filename);
+    Resource loadAsResource(String fileId);
 }

@@ -7,7 +7,8 @@ public enum ErrorType {
     NOT_FOUND_JOIN("Join Not Found"),
     JOIN_ALREADY_EXIST("Join Already Exist"),
     DIRECTORY_CREATE_FAIL("Directory Create Fail"),
-    FILE_CREATE_FAIL("File Create Fail");
+    FILE_CREATE_FAIL("File Create Fail"),
+    FILE_READ_FAIL("File Read Fail");
 
     private final String message;
 

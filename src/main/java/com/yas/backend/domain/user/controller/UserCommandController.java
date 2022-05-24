@@ -46,7 +46,7 @@ public class UserCommandController extends BaseController {
     @PatchMapping(value = "user/{id}/profileImage", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "프로필 사진 변경", description = "Multipart/form")
     public Boolean updateProfileImage(@PathVariable Long id, @RequestBody MultipartFile file) {
-        String fileId = storageService.store(file, "profile", LocalDate.now().plusYears(100));
+        String fileId = this.storageService.store(file, "profile", LocalDate.now().plusYears(100));
         UserDto dto = this.userCommandService.updateProfileImage(id, fileId);
         return dto.getProfileImage().equals(fileId);
     }

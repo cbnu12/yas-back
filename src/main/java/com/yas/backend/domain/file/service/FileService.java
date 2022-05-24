@@ -3,15 +3,18 @@ package com.yas.backend.domain.file.service;
 import com.yas.backend.common.entity.FileEntity;
 import com.yas.backend.common.exception.DirectoryCreateFailException;
 import com.yas.backend.common.exception.FileCreateFailException;
+import com.yas.backend.common.exception.FileReadFailException;
 import com.yas.backend.domain.file.repository.FileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,7 +49,8 @@ public class FileService implements StorageService {
 
         FileEntity fileEntity = FileEntity.builder()
                 .id(id)
-                .filePath(Paths.get(saveDirectory.toString(), id).toString())
+                .filePath(saveDirectory.toString())
+                .fileFullPath(Paths.get(saveDirectory.toString(), id).toString())
                 .originalFilename(file.getOriginalFilename())
                 .destructionDate(destructionDate)
                 .build();
@@ -55,7 +59,15 @@ public class FileService implements StorageService {
     }
 
     @Override
-    public Resource loadAsResource(String filename) {
-        return null;
+    public Resource loadAsResource(String fileId) {
+        FileEntity entity = this.fileRepository.findById(fileId).orElseThrow(FileReadFailException::new);
+        try {
+            Path file = Paths.get(entity.getFilePath()).resolve(entity.getId());
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) return resource;
+        } catch (MalformedURLException e) {
+            throw new FileReadFailException();
+        }
+        throw new FileReadFailException();
     }
 }
