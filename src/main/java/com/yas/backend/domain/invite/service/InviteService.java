@@ -15,7 +15,7 @@ public class InviteService {
     private final InviteMapper inviteMapper;
     private final InviteRepository inviteRepository;
 
-    public InviteDto teamInvite(InviteDto inviteDto){
+    public InviteDto teamInvite(InviteDto inviteDto) {
         return inviteMapper.entityToDto(inviteRepository.save(inviteMapper.dtoToEntity(inviteDto)));
     }
 

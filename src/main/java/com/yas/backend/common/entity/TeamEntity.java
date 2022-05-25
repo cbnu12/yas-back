@@ -70,7 +70,7 @@ public class TeamEntity {
     private LocalDateTime updatedAt;
 
     public List<JoinEntity> getJoins() {
-        if(CollectionUtils.isEmpty(this.joins)) {
+        if (CollectionUtils.isEmpty(this.joins)) {
             return Lists.newArrayList();
         }
 

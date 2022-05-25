@@ -13,14 +13,14 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeamDto {
-        private Long id;
-        private String name;
-        private String description;
-        private Long maxUserCount;
-        private Long currentUserCount;
-        private Long ownerId;
-        private String topic;
-        private Set<String> techStacks;
-        private Set<Long> userIds;
-        private LocalDateTime createdAt;
+    private Long id;
+    private String name;
+    private String description;
+    private Long maxUserCount;
+    private Long currentUserCount;
+    private Long ownerId;
+    private String topic;
+    private Set<String> techStacks;
+    private Set<Long> userIds;
+    private LocalDateTime createdAt;
 }

@@ -2,7 +2,6 @@ package com.yas.backend.domain.user.mapper;
 
 import com.yas.backend.common.entity.FileEntity;
 import com.yas.backend.common.entity.UserEntity;
-
 import com.yas.backend.domain.user.User;
 import com.yas.backend.domain.user.dto.UserDto;
 import org.springframework.stereotype.Component;

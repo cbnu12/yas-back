@@ -13,21 +13,22 @@ import org.springframework.stereotype.Component;
 public class InviteMapper {
     private final UserMapper userMapper;
     private final TeamMapper teamMapper;
-    public InviteEntity dtoToEntity(InviteDto dto){
+
+    public InviteEntity dtoToEntity(InviteDto dto) {
         return InviteEntity.builder()
                 .user(userMapper.dtoToEntity(dto.getUser()))
                 .team(teamMapper.dtoToEntity(dto.getTeam()))
                 .build();
     }
 
-    public InviteDto entityToDto(InviteEntity entity){
+    public InviteDto entityToDto(InviteEntity entity) {
         return InviteDto.builder()
                 .user(userMapper.entityToDto(entity.getUser()))
                 .team(teamMapper.entityToDto(entity.getTeam()))
                 .build();
     }
 
-    public InviteResponse dtoToResponse(InviteDto dto){
+    public InviteResponse dtoToResponse(InviteDto dto) {
         return InviteResponse.builder()
                 .user(dto.getUser())
                 .team(dto.getTeam())

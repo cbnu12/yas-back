@@ -22,15 +22,16 @@ server:
 
 ---
 spring:
+  config:
+    activate:
+      on-profile: local
   sql:
     init:
       mode: always
   output:
     ansi:
       enabled: always
-  config:
-    activate:
-      on-profile: local
+
   jpa:
     open-in-view: false
     defer-datasource-initialization: true

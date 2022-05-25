@@ -1,7 +1,6 @@
 package com.yas.backend.domain.invite.exchange;
 
 import com.yas.backend.domain.invite.dto.InviteDto;
-import com.yas.backend.domain.join.dto.JoinDto;
 import com.yas.backend.domain.team.dto.TeamDto;
 import com.yas.backend.domain.user.dto.UserDto;
 
@@ -14,7 +13,7 @@ public record InviteRequest(
 
 
 ) {
-    public InviteDto toDto(){
+    public InviteDto toDto() {
         return InviteDto.builder()
                 .id(this.id)
                 .user(this.user)
