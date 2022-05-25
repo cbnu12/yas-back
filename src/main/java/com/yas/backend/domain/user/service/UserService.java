@@ -6,9 +6,10 @@ import com.yas.backend.domain.user.dto.UserDto;
 import com.yas.backend.domain.user.mapper.UserMapper;
 import com.yas.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,9 +26,9 @@ public class UserService {
         return userRepository.findByEmail(email).map(mapper::entityToDto);
     }
 
-    public List<UserDto> findByPredicate(BooleanBuilder predicate) {
-        List<UserEntity> entities = this.userRepository.findByPredicate(predicate);
-        return entities.stream().map(this.mapper::entityToDto).toList();
+    public Page<UserDto> findByPredicate(BooleanBuilder predicate, Pageable pageable) {
+        Page<UserEntity> entities = this.userRepository.findByPredicate(predicate, pageable);
+        return entities.map(this.mapper::entityToDto);
     }
 
     public UserDto save(UserDto dto) {

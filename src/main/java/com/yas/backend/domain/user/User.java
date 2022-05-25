@@ -43,6 +43,10 @@ public class User {
         this.lastPasswordUpdateAt = LocalDateTime.now();
     }
 
+    public void updateProfileImage(String fileId) {
+        this.profileImage = fileId;
+    }
+
     public void unRegister() {
         this.isDeleted = false;
     }

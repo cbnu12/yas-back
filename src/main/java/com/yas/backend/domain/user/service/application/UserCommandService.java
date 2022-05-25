@@ -34,6 +34,13 @@ public class UserCommandService {
         return this.userService.save(this.mapper.domainToDto(user));
     }
 
+    public UserDto updateProfileImage(Long id, String fileId) {
+        User user = this.userService.findById(id).map(this.mapper::dtoToDomain).orElseThrow(UserNotFoundException::new);
+        user.updateProfileImage(fileId);
+
+        return this.userService.save(this.mapper.domainToDto(user));
+    }
+
     public UserDto unRegister(Long id) {
         User user = this.userService.findById(id).map(this.mapper::dtoToDomain).orElseThrow(UserNotFoundException::new);
         user.unRegister();

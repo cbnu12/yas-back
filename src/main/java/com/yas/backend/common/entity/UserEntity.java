@@ -41,7 +41,7 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String nickname;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private FileEntity profileImage;
 
