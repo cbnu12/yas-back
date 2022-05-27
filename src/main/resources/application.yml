@@ -43,7 +43,7 @@ spring:
     show-sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/YAS
+    url: jdbc:mysql://localhost:3306/yas
     username: root
     password: 1234
 
@@ -55,13 +55,13 @@ spring:
       on-profile: dev
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     generate-ddl: true
     show-sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/YAS
+    url: jdbc:mysql://211.208.125.180:3306/yas
     username: root
-    password: P@6985w0rd
+    password: 1234
 
 ---
