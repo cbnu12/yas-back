@@ -17,4 +17,4 @@ ARG JAR_FILE=./build/libs/backend-0.0.1-SNAPSHOT.jar
 ADD ${JAR_FILE} api.jar
 
 # Run the jar file
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=prod","-Duser.timezone=Asia/Seoul","-jar","/api.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-Duser.timezone=Asia/Seoul", "-jar", "/api.jar"]
