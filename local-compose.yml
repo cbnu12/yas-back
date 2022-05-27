@@ -6,7 +6,7 @@ services:
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_DATABASE=YAS
+      - MYSQL_DATABASE=yas
       - MYSQL_ROOT_PASSWORD=1234
       - TZ=Asia/Seoul
     volumes:
