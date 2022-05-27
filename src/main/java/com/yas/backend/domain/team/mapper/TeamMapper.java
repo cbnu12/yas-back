@@ -5,7 +5,9 @@ import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.team.Team;
 import com.yas.backend.domain.team.dto.TeamDto;
 import com.yas.backend.domain.team.repository.TeamTechStackRepository;
-import com.yas.backend.domain.user.repository.UserRepository;
+import com.yas.backend.domain.user.dto.UserDto;
+import com.yas.backend.domain.user.mapper.UserMapper;
+import com.yas.backend.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +17,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TeamMapper {
 
-    private final UserRepository userRepository;
-    private final TeamTechStackRepository teamTechStackRepository;
+    private final UserMapper userMapper;
+    private final UserService userService;
 
     public Team dtoToDomain(final TeamDto teamDto) {
         return Team.builder()
@@ -33,13 +35,15 @@ public class TeamMapper {
     }
 
     public TeamEntity dtoToEntity(final TeamDto teamDto) {
+        UserDto userDto = userService.findById(teamDto.getOwnerId())
+                .orElseThrow(UserNotFoundException::new);
+
         return TeamEntity.builder()
                 .id(teamDto.getId())
                 .name(teamDto.getName())
                 .maxUserCount(teamDto.getMaxUserCount())
                 .description(teamDto.getDescription())
-                .owner(userRepository.findById(teamDto.getOwnerId())
-                        .orElseThrow(UserNotFoundException::new))
+                .owner(userMapper.dtoToEntity(userDto))
                 .build();
     }
 
@@ -58,25 +62,6 @@ public class TeamMapper {
                 .createdAt(entity.getCreatedAt())
                 .build();
     }
-
-    public Team entityToDomain(final TeamEntity entity) {
-        return Team.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .description(entity.getDescription())
-                .ownerId(entity.getOwner().getId())
-                .maxUserCount(entity.getMaxUserCount())
-                .currentUserCount(entity.getJoins().stream().filter(JoinEntity::getIsAlive).count())
-                .topic(entity.getTopic().getName())
-                .techStacks(teamTechStackRepository.findByTeamId(entity.getId()).stream()
-                        .map(TeamTechStackEntity::getTechStack)
-                        .map(TechStackEntity::getName)
-                        .collect(Collectors.toSet()))
-                .isActive(entity.isActive())
-                .createdAt(entity.getCreatedAt())
-                .build();
-    }
-
 
     public TeamDto domainToDto(final Team team) {
         return TeamDto.builder()
