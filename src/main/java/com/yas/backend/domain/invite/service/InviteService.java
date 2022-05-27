@@ -1,6 +1,6 @@
 package com.yas.backend.domain.invite.service;
 
-import com.yas.backend.domain.invite.data.mapper.InviteMapper;
+import com.yas.backend.domain.invite.mapper.InviteMapper;
 import com.yas.backend.domain.invite.dto.InviteDto;
 import com.yas.backend.domain.invite.repository.InviteRepository;
 import lombok.RequiredArgsConstructor;

@@ -26,6 +26,7 @@ public class TeamService {
     public TeamDto findById(Long teamId) {
         TeamEntity teamEntity = teamRepository.findById(teamId)
                 .orElseThrow(TeamNotFoundException::new);
+
         return teamMapper.entityToDto(teamEntity);
     }
 

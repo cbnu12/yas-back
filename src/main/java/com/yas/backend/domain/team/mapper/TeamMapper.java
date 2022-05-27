@@ -1,10 +1,11 @@
 package com.yas.backend.domain.team.mapper;
 
-import com.yas.backend.common.entity.*;
+import com.yas.backend.common.entity.JoinEntity;
+import com.yas.backend.common.entity.TeamEntity;
+import com.yas.backend.common.entity.UserEntity;
 import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.team.Team;
 import com.yas.backend.domain.team.dto.TeamDto;
-import com.yas.backend.domain.team.repository.TeamTechStackRepository;
 import com.yas.backend.domain.user.dto.UserDto;
 import com.yas.backend.domain.user.mapper.UserMapper;
 import com.yas.backend.domain.user.service.UserService;
