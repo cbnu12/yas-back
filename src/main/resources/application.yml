@@ -55,10 +55,10 @@ spring:
       on-profile: dev
   jpa:
     open-in-view: false
-      defer-datasource-initialization: true
-      properties:
-        hibernate:
-          format_sql: true
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: true
     hibernate:
       ddl-auto: create
     generate-ddl: true
