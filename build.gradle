@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.6.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
 }
 
@@ -54,15 +55,40 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
 // QueryDSL
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
 sourceSets {
     main {
         java {
-            srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
+            srcDirs = ['src/main/java', querydslDir]
         }
     }
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+compileQuerydsl{
+    options.annotationProcessorPath = configurations.querydsl
 }
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+
+clean.doLast {
+    file(querydslDir).delete()
+}
+
+compileJava.doFirst {
+    if(file(querydslDir).exists()) delete(file(querydslDir))
+}
+
