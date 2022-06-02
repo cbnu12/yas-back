@@ -11,7 +11,7 @@
 
 0. docker & docker-compose 설치 (알아서)
 1. project directory에서 docker-compose start
-    1. ```{{project path}}/local-compose.yml up -d```
+    1. ```docker-compose -f local-compose.yml up -d```
     2. intellij 이용시 run configuration에 추가하여 사용가능
 2. application 실행
 

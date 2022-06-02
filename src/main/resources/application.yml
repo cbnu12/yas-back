@@ -37,14 +37,15 @@ spring:
     defer-datasource-initialization: true
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     generate-ddl: true
     show-sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/yas
+    url: jdbc:mysql://local-mysql/yas
     username: root
     password: 1234
   servlet:
@@ -66,7 +67,7 @@ spring:
     show-sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://211.208.125.180:3306/yas
+    url: jdbc:mysql://yas-mysql/yas
     username: root
     password: 1234
 
