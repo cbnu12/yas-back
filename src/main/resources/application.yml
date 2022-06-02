@@ -65,6 +65,7 @@ spring:
     defer-datasource-initialization: true
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
     hibernate:
       ddl-auto: create
