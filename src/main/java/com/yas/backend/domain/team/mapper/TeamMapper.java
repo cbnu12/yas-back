@@ -6,12 +6,14 @@ import com.yas.backend.common.entity.UserEntity;
 import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.team.Team;
 import com.yas.backend.domain.team.dto.TeamDto;
+import com.yas.backend.domain.team.value.TeamInfo;
 import com.yas.backend.domain.user.dto.UserDto;
 import com.yas.backend.domain.user.mapper.UserMapper;
 import com.yas.backend.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 @Component
@@ -23,15 +25,12 @@ public class TeamMapper {
 
     public Team dtoToDomain(final TeamDto teamDto) {
         return Team.builder()
-                .id(teamDto.getId())
-                .name(teamDto.getName())
-                .maxUserCount(teamDto.getMaxUserCount())
-                .currentUserCount(teamDto.getCurrentUserCount())
-                .description(teamDto.getDescription())
+                .info(TeamInfo.of(teamDto.getId(), teamDto.getName(), teamDto.getDescription(), teamDto.getMaxMemberCount(), LocalDateTime.now()))
                 .ownerId(teamDto.getOwnerId())
-                .userIds(teamDto.getUserIds())
-                .techStacks(teamDto.getTechStacks())
-                .createdAt(teamDto.getCreatedAt())
+                .memberIds(teamDto.getMemberIds())
+                .mainTechStackId(teamDto.getMainTechStackId())
+                .techStackIds(teamDto.getTechStackIds())
+                .teamStatus(teamDto.getTeamStatus())
                 .build();
     }
 
@@ -42,9 +41,10 @@ public class TeamMapper {
         return TeamEntity.builder()
                 .id(teamDto.getId())
                 .name(teamDto.getName())
-                .maxUserCount(teamDto.getMaxUserCount())
+                .maxMemberCount(teamDto.getMaxMemberCount())
                 .description(teamDto.getDescription())
                 .owner(userMapper.dtoToEntity(userDto))
+                .status(teamDto.getTeamStatus())
                 .build();
     }
 
@@ -52,29 +52,31 @@ public class TeamMapper {
         return TeamDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
-                .maxUserCount(entity.getMaxUserCount())
+                .maxMemberCount(entity.getMaxMemberCount())
                 .currentUserCount(entity.getJoins().stream().filter(JoinEntity::getIsAlive).count())
                 .description(entity.getDescription())
                 .ownerId(entity.getOwner().getId())
-                .userIds(entity.getJoins().stream()
+                .memberIds(entity.getJoins().stream()
                         .map(JoinEntity::getUser)
                         .map(UserEntity::getId)
                         .collect(Collectors.toSet()))
+                .teamStatus(entity.getStatus())
                 .createdAt(entity.getCreatedAt())
                 .build();
     }
 
     public TeamDto domainToDto(final Team team) {
         return TeamDto.builder()
-                .id(team.getId())
-                .name(team.getName())
-                .description(team.getDescription())
+                .id(team.getInfo().getId())
+                .name(team.getInfo().getName())
+                .description(team.getInfo().getDescription())
                 .ownerId(team.getOwnerId())
-                .maxUserCount(team.getMaxUserCount())
-                .currentUserCount(team.getCurrentUserCount())
-                .userIds(team.getUserIds())
-                .techStacks(team.getTechStacks())
-                .createdAt(team.getCreatedAt())
+                .maxMemberCount(team.getInfo().getMaxMemberCount())
+                .currentUserCount((long) team.getMemberIds().size())
+                .memberIds(team.getMemberIds())
+                .mainTechStackId(team.getMainTechStackId())
+                .techStackIds(team.getTechStackIds())
+                .createdAt(team.getInfo().getCreatedAt())
                 .build();
     }
 }

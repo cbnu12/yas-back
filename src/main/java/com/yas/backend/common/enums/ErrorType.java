@@ -8,10 +8,8 @@ public enum ErrorType {
     JOIN_ALREADY_EXIST("Join Already Exist"),
     DIRECTORY_CREATE_FAIL("Directory Create Fail"),
     FILE_CREATE_FAIL("File Create Fail"),
-    FILE_READ_FAIL("File Read Fail");
-
+    FILE_READ_FAIL("File Read Fail"),
     NOT_FOUND_INVITATION("Invitation Not Found"),
-    JOIN_ALREADY_EXIST("Join Already Exist"),
     INVITATION_ALREADY_EXIST("Invitation Already Exist");
 
     private final String message;
