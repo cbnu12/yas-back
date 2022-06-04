@@ -1,4 +1,4 @@
-package com.yas.backend.domain.invite.data.mapper;
+package com.yas.backend.domain.invite.mapper;
 
 import com.yas.backend.common.entity.InviteEntity;
 import com.yas.backend.domain.invite.dto.InviteDto;

@@ -1,6 +1,6 @@
 package com.yas.backend.domain.invite.controller;
 
-import com.yas.backend.domain.invite.data.mapper.InviteMapper;
+import com.yas.backend.domain.invite.mapper.InviteMapper;
 import com.yas.backend.domain.invite.exchange.InviteRequest;
 import com.yas.backend.domain.invite.exchange.InviteResponse;
 import com.yas.backend.domain.invite.service.InviteService;
