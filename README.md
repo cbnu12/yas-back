@@ -8,11 +8,12 @@
 ## Description
 
 ## How to start up
+
 0. docker & docker-compose 설치 (알아서)
 1. project directory에서 docker-compose start
-   1. ```{{project path}}/local-compose.yml up -d```
-   2. intellij 이용시 run configuration에 추가하여 사용가능
-2. application 실행 
+    1. ```docker-compose -f local-compose.yml up -d```
+    2. intellij 이용시 run configuration에 추가하여 사용가능
+2. application 실행
 
 ## :raising_hand: Backers
 
@@ -22,4 +23,7 @@
 <a class="member-avatar" data-ga-click="Orgs, go to person, location:profile people module; text:username" data-hovercard-type="user" data-hovercard-url="/users/duckduck93/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="/duckduck93"><img class="avatar avatar-user" src="https://avatars.githubusercontent.com/u/72935159?s=70&amp;v=4" width="35" height="35" alt="@duckduck93"></a>
 
 ## Reference
-- Swagger ([OpenAPI 3.0 SpringDoc](https://springdoc.org/),  [Demo](https://github.com/springdoc/springdoc-openapi-demos), [Blog Sample](https://blog.jiniworld.me/category/Spring/Spring%20Boot%20Tutorial))
+
+- Swagger ([OpenAPI 3.0 SpringDoc](https://springdoc.org/)
+  ,  [Demo](https://github.com/springdoc/springdoc-openapi-demos)
+  , [Blog Sample](https://blog.jiniworld.me/category/Spring/Spring%20Boot%20Tutorial))

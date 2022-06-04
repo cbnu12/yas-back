@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class JsonUtils {
 
+    static final TypeReference<Map<String, Object>> typeOfMap = new TypeReference<>() {
+    };
     private static final ObjectMapper om = new ObjectMapper();
 
     public static <T> T fromJson(String json, Class<T> type) {
@@ -24,8 +26,6 @@ public class JsonUtils {
             throw new JsonException(e);
         }
     }
-
-    static final TypeReference<Map<String, Object>> typeOfMap = new TypeReference<>() {};
 
     public static Map<String, Object> toMap(String json) {
         try {

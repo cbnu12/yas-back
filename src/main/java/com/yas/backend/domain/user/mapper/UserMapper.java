@@ -2,7 +2,6 @@ package com.yas.backend.domain.user.mapper;
 
 import com.yas.backend.common.entity.FileEntity;
 import com.yas.backend.common.entity.UserEntity;
-
 import com.yas.backend.domain.user.User;
 import com.yas.backend.domain.user.dto.UserDto;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ public class UserMapper {
                 .email(entity.getEmail())
                 .password(entity.getPassword())
                 .nickname(entity.getNickname())
-                .profileImage(entity.getProfileImage().map(FileEntity::getFilePath).orElse(""))
+                .profileImage(entity.getProfileImage().map(FileEntity::getId).orElse(""))
                 .birth(entity.getBirth())
                 .showsBirth(entity.isShowsBirth())
                 .careerStartAt(entity.getCareerStartAt())
@@ -31,6 +30,7 @@ public class UserMapper {
                 .email(dto.getEmail())
                 .password(dto.getPassword())
                 .nickname(dto.getNickname())
+                .profileImage(FileEntity.builder().id(dto.getProfileImage()).build())
                 .birth(dto.getBirth())
                 .showsBirth(dto.isShowsBirth())
                 .careerStartAt(dto.getCareerStartAt())

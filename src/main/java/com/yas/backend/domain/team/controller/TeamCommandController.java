@@ -4,7 +4,7 @@ import com.yas.backend.common.controller.BaseController;
 import com.yas.backend.domain.team.dto.TeamDto;
 import com.yas.backend.domain.team.exchange.TeamCreateRequest;
 import com.yas.backend.domain.team.exchange.TeamCreateResponse;
-import com.yas.backend.domain.team.service.application.TeamCommandService;
+import com.yas.backend.domain.team.service.applicationservice.TeamCommandService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

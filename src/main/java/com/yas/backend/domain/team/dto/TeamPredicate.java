@@ -29,7 +29,7 @@ public class TeamPredicate {
         QTeamEntity team = QTeamEntity.teamEntity;
         BooleanBuilder builder = new BooleanBuilder();
 
-        if(CollectionUtils.isNotEmpty(request.getKeywords())) {
+        if (CollectionUtils.isNotEmpty(request.getKeywords())) {
             Sets.newHashSet(request.getKeywords())
                     .forEach(keyword -> builder.and(team.name.like(keyword)));
         }
@@ -41,7 +41,7 @@ public class TeamPredicate {
         QTechStackEntity techStack = QTechStackEntity.techStackEntity;
         BooleanBuilder builder = new BooleanBuilder();
 
-        if(CollectionUtils.isNotEmpty(request.getKeywords())) {
+        if (CollectionUtils.isNotEmpty(request.getKeywords())) {
             builder.and(techStack.name.in(Sets.newHashSet(request.getKeywords())));
         }
 

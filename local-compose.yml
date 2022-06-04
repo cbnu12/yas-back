@@ -1,15 +1,22 @@
-version: "3.7"
+version: "3.8"
 services:
   db:
     image: mysql:5.7
     container_name: local-mysql
-    ports:
-      - "3306:3306"
     environment:
-      - MYSQL_DATABASE=YAS
+      - MYSQL_DATABASE=yas
       - MYSQL_ROOT_PASSWORD=1234
       - TZ=Asia/Seoul
+    ports:
+      - "3306:3306"
     volumes:
       - local-mysql:/var/lib/mysql
+    networks:
+      - yas-net
+
 volumes:
   local-mysql:
+
+networks:
+  yas-net:
+    driver: bridge

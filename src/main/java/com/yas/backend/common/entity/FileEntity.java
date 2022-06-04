@@ -12,7 +12,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Builder
 @Getter
@@ -22,15 +21,16 @@ import java.util.UUID;
 @Table(name = "files")
 public class FileEntity {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @Column(columnDefinition = "BINARY(16)", nullable = false)
-    private UUID id;
+    private String id;
 
     @Column
     private String filePath;
 
     @Column
-    private String originFileName;
+    private String fileFullPath;
+
+    @Column
+    private String originalFilename;
 
     @Column
     private LocalDate destructionDate;

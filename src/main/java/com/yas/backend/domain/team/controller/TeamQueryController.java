@@ -5,7 +5,7 @@ import com.yas.backend.domain.team.dto.TeamDto;
 import com.yas.backend.domain.team.exchange.TeamSearchRequest;
 import com.yas.backend.domain.team.exchange.TeamSearchResponse;
 import com.yas.backend.domain.team.exchange.TeamsSearchResponse;
-import com.yas.backend.domain.team.service.TeamSearchService;
+import com.yas.backend.domain.team.service.applicationservice.TeamSearchService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

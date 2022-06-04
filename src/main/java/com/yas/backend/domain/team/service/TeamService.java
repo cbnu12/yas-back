@@ -11,8 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 @Slf4j
 @Service
@@ -22,9 +22,11 @@ public class TeamService {
     private final TeamMapper teamMapper;
     private final TeamRepository teamRepository;
 
+    @Transactional(readOnly = true)
     public TeamDto findById(Long teamId) {
         TeamEntity teamEntity = teamRepository.findById(teamId)
                 .orElseThrow(TeamNotFoundException::new);
+
         return teamMapper.entityToDto(teamEntity);
     }
 
@@ -40,7 +42,8 @@ public class TeamService {
         return teamMapper.entityToDto(teamEntity);
     }
 
+    @Transactional(readOnly = true)
     public Page<TeamEntity> findByPredicate(final BooleanBuilder teamPredicate, final Pageable pageable) {
-         return teamRepository.findByPredicate(teamPredicate, pageable);
+        return teamRepository.findByPredicate(teamPredicate, pageable);
     }
 }

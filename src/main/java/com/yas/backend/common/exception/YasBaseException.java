@@ -1,6 +1,6 @@
 package com.yas.backend.common.exception;
 
-public abstract class YasBaseException extends RuntimeException{
+public abstract class YasBaseException extends RuntimeException {
     protected final ErrorResponse errorResponse;
 
     protected YasBaseException(int statusCode, String message) {

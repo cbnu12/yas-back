@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class TeamCustomRepositoryImpl implements TeamCustomRepository{
+public class TeamCustomRepositoryImpl implements TeamCustomRepository {
 
     private final JPAQueryFactory queryFactory;
 

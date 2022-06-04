@@ -10,9 +10,9 @@ import com.yas.backend.domain.user.mapper.UserMapper;
 import com.yas.backend.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Slf4j
 @Service
@@ -21,13 +21,9 @@ public class UserQueryService {
     private final UserService userService;
     private final UserMapper mapper;
 
-    public List<UserDto> findByPredicate(UserSearchRequest request) {
+    public Page<UserDto> findByPredicate(UserSearchRequest request, Pageable pageable) {
         BooleanBuilder predicate = UserPredicate.search(request.getEmail(), request.getNickname());
-        List<User> users = this.userService.findByPredicate(predicate).stream()
-                .map(this.mapper::dtoToDomain)
-                .toList();
-
-        return users.stream().map(this.mapper::domainToDto).toList();
+        return this.userService.findByPredicate(predicate, pageable);
     }
 
     public UserDto findById(Long id) {

@@ -22,31 +22,38 @@ server:
 
 ---
 spring:
+  config:
+    activate:
+      on-profile: local
   sql:
     init:
       mode: always
   output:
     ansi:
       enabled: always
-  config:
-    activate:
-      on-profile: local
+
   jpa:
     open-in-view: false
     defer-datasource-initialization: true
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     generate-ddl: true
     show-sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/YAS
+    url: jdbc:mysql://local-mysql/yas
     username: root
     password: 1234
-
+  servlet:
+    multipart:
+      location: /Users/duckduck/WorkSpace/yas-back/uploads/
+      max-file-size: 10MB
+      max-request-size: 10MB
+      enabled: true
 ---
 
 spring:
@@ -54,14 +61,20 @@ spring:
     activate:
       on-profile: dev
   jpa:
+    open-in-view: false
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     generate-ddl: true
     show-sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/YAS
+    url: jdbc:mysql://yas-mysql/yas
     username: root
-    password: P@6985w0rd
+    password: 1234
 
 ---

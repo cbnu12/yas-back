@@ -79,7 +79,7 @@ class TeamCommandControllerTest {
     @DisplayName("03. 팀 삭제 정상 처리")
     void _03_team_remove_test() throws Exception {
         ResultActions result = mockMvc.perform(
-                delete("/api/team/"+1)
+                delete("/api/team/" + 1)
                         .header(InterceptorConfig.X_USER_ID, "1")
         );
 

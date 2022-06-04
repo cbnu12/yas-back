@@ -14,22 +14,22 @@ import java.util.List;
 @AllArgsConstructor
 public class TeamCreateRequest {
 
-        private Long ownerId;
-        private String name;
-        private String description;
-        private Long maxUserCount;
-        private String topic;
-        private List<String> techStacks;
-        private Schedule schedule;
+    private Long ownerId;
+    private String name;
+    private String description;
+    private Long maxUserCount;
+    private String topic;
+    private List<String> techStacks;
+    private Schedule schedule;
 
-        public TeamDto toDto() {
-                return TeamDto.builder()
-                        .ownerId(ownerId)
-                        .name(name)
-                        .description(description)
-                        .maxUserCount(maxUserCount)
-                        .topic(topic)
-                        .techStacks(Sets.newHashSet(techStacks))
-                        .build();
-        }
+    public TeamDto toDto() {
+        return TeamDto.builder()
+                .ownerId(ownerId)
+                .name(name)
+                .description(description)
+                .maxUserCount(maxUserCount)
+                .topic(topic)
+                .techStacks(Sets.newHashSet(techStacks))
+                .build();
+    }
 }
