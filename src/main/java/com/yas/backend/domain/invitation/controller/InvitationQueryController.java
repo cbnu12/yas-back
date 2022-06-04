@@ -2,7 +2,7 @@ package com.yas.backend.domain.invitation.controller;
 
 import com.yas.backend.domain.invitation.exchange.InvitationSearchRequest;
 import com.yas.backend.domain.invitation.exchange.InvitationsSearchResponse;
-import com.yas.backend.domain.invitation.service.InvitationSearchService;
+import com.yas.backend.domain.invitation.service.applicationservice.InvitationSearchService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

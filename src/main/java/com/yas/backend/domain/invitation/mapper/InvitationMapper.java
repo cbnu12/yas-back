@@ -1,33 +1,36 @@
-package com.yas.backend.domain.invitation.data.mapper;
+package com.yas.backend.domain.invitation.mapper;
 
 import com.yas.backend.common.entity.InvitationEntity;
-import com.yas.backend.common.exception.TeamNotFoundException;
+import com.yas.backend.common.entity.TeamEntity;
+import com.yas.backend.common.entity.UserEntity;
 import com.yas.backend.common.exception.UserNotFoundException;
 import com.yas.backend.domain.invitation.Invitation;
 import com.yas.backend.domain.invitation.dto.InvitationDto;
 import com.yas.backend.domain.team.mapper.TeamMapper;
-import com.yas.backend.domain.team.repository.TeamRepository;
+import com.yas.backend.domain.team.service.TeamService;
 import com.yas.backend.domain.user.mapper.UserMapper;
-import com.yas.backend.domain.user.repository.UserRepository;
+import com.yas.backend.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class InvitationMapper {
+    private final UserService userService;
     private final UserMapper userMapper;
+    private final TeamService teamService;
     private final TeamMapper teamMapper;
-    private final UserRepository userRepository;
-    private final TeamRepository teamRepository;
 
     public InvitationEntity dtoToEntity(InvitationDto dto) {
+        UserEntity userEntity = userMapper.dtoToEntity(userService.findById(dto.getUserId())
+                .orElseThrow(UserNotFoundException::new));
+        TeamEntity teamEntity= teamMapper.dtoToEntity(teamService.findById(dto.getTeamId()));
+
         return InvitationEntity.builder()
                 .id(dto.getId())
                 .status(dto.getStatus())
-                .user(userRepository.findById(dto.getUserId())
-                        .orElseThrow(UserNotFoundException::new))
-                .team(teamRepository.findById(dto.getTeamId())
-                        .orElseThrow(TeamNotFoundException::new))
+                .user(userEntity)
+                .team(teamEntity)
                 .isAlive(dto.getIsAlive())
                 .createdBy(dto.getCreatedBy())
                 .createdAt(dto.getCreatedAt())

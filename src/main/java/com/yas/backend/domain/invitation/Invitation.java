@@ -26,12 +26,10 @@ public class Invitation {
                 .id(dto.getId())
                 .userId(dto.getUserId())
                 .teamId(dto.getTeamId())
-                .isAlive(dto.getIsAlive())
-                .status(dto.getStatus())
+                .isAlive(Boolean.TRUE)
+                .status(InvitationStatus.REQUEST)
                 .createdBy(dto.getCreatedBy())
                 .createdAt(dto.getCreatedAt())
-                .updatedBy(dto.getUpdatedBy())
-                .updatedAt(dto.getUpdatedAt())
                 .build();
 
     }

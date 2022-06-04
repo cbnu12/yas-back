@@ -1,4 +1,4 @@
-package com.yas.backend.domain.invitation.service.domainService;
+package com.yas.backend.domain.invitation.service;
 
 import com.querydsl.core.BooleanBuilder;
 import com.yas.backend.common.entity.InvitationEntity;
@@ -7,11 +7,9 @@ import com.yas.backend.common.entity.UserEntity;
 import com.yas.backend.common.exception.InvitationNotFoundException;
 import com.yas.backend.common.exception.TeamNotFoundException;
 import com.yas.backend.common.exception.UserNotFoundException;
-import com.yas.backend.domain.invitation.data.mapper.InvitationMapper;
+import com.yas.backend.domain.invitation.mapper.InvitationMapper;
 import com.yas.backend.domain.invitation.dto.InvitationDto;
 import com.yas.backend.domain.invitation.repository.InvitationRepository;
-import com.yas.backend.domain.team.mapper.TeamMapper;
-import com.yas.backend.domain.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -25,9 +23,6 @@ import org.springframework.stereotype.Service;
 public class InvitationService {
     private final InvitationMapper invitationMapper;
     private final InvitationRepository invitationRepository;
-
-    private final UserMapper userMapper;
-    private final TeamMapper teamMapper;
 
     public InvitationDto save(InvitationDto invitationDto) throws UserNotFoundException, TeamNotFoundException {
         return invitationMapper.entityToDto(invitationRepository.save(invitationMapper.dtoToEntity(invitationDto)));
