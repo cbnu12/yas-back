@@ -1,16 +1,15 @@
-package com.yas.backend.domain.invite.dto;
+package com.yas.backend.domain.invitation.exchange;
 
 import com.yas.backend.domain.team.dto.TeamDto;
 import com.yas.backend.domain.user.dto.UserDto;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
-@Getter
 @Builder
-public class InviteDto {
-    private Long id;
+@Getter
+@Setter
+public class InvitationResponse {
     private UserDto user;
     private TeamDto team;
-    private String updatedBy;
-    private String createdBy;
 }

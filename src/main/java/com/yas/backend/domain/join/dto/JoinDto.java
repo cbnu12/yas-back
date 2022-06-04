@@ -1,13 +1,17 @@
 package com.yas.backend.domain.join.dto;
 
 import com.yas.backend.common.enums.JoinStatus;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class JoinDto {
     private Long id;
     private Long userId;

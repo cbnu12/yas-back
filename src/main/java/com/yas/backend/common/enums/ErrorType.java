@@ -10,6 +10,10 @@ public enum ErrorType {
     FILE_CREATE_FAIL("File Create Fail"),
     FILE_READ_FAIL("File Read Fail");
 
+    NOT_FOUND_INVITATION("Invitation Not Found"),
+    JOIN_ALREADY_EXIST("Join Already Exist"),
+    INVITATION_ALREADY_EXIST("Invitation Already Exist");
+
     private final String message;
 
     ErrorType(String message) {
