@@ -41,7 +41,7 @@ public class TeamCommandService {
         Team team = teamMapper.dtoToDomain(teamService.findById(teamId));
         team.deactivate();
 
-        List<Join> joins = joinService.findByTeamId(team.getId()).stream()
+        List<Join> joins = joinService.findByTeamId(team.getInfo().getId()).stream()
                 .map(joinMapper::dtoToDomain)
                 .toList();
         joins.forEach(Join::deactivate);

@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("local")
+@ActiveProfiles("local-test")
 @DisplayName("Team command API 테스트")
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class TeamCommandControllerTest {
@@ -91,10 +91,10 @@ class TeamCommandControllerTest {
         return TeamCreateRequest.builder()
                 .ownerId(ownerId)
                 .name("테스트용 팀")
-                .description("테스트")
-                .maxUserCount(10L)
-                .topic("테스트 토픽")
-                .techStacks(Lists.newArrayList("스프링", "자바"))
+                .description("test")
+                .maxMemberCount(10L)
+                .mainTechStack(1L)
+                .techStackIds(Lists.newArrayList(1L, 2L))
                 .schedule(Schedule.builder()
                         .place("테스트 장소")
                         .dayOfWeek("테스트 요일")

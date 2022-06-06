@@ -1,5 +1,5 @@
 insert into users(`email`,`password`,`nickname`,
-                  `shows_birth`,`career_start_at`,`is_active`, `is_deleted`, `last_password_update_at`,
+                  `shows_birth`,`career_start_at`,`IS_ACTIVE`, `is_deleted`, `last_password_update_at`,
                   `created_by`,`created_at`,`updated_by`,`updated_at`,`sign_in_fail_count`)
 values ('temp@temp.com','password','nickname',
         true,now(),true,false,now(),
@@ -9,10 +9,10 @@ insert into techstacks(name, created_by, created_at, updated_by, updated_at)
 values ('Spring','temp',now(),'temp',now());
 
 
-insert into teams(`name`,`max_user_count`,`description`,
-                  `owner_id`,`topic`,`is_active`,`created_by`,`created_at`,`updated_by`,`updated_at`)
+insert into teams(`name`,`max_member_count`,`description`,
+                  `owner_id`,`main_techstack_id`,`status`,`created_by`,`created_at`,`updated_by`,`updated_at`)
 values ('teamTest',10,'testesttstsetestsetset',
-        1, 1, true, 'temp',now(),'temp',now());
+        1, 1, 'ACTIVE', 'temp',now(),'temp',now());
 
 INSERT INTO users (BIRTH, CAREER_START_AT, CREATED_AT, CREATED_BY, EMAIL, IS_ACTIVE, IS_DELETED, LAST_PASSWORD_UPDATE_AT, NICKNAME, PASSWORD, SHOWS_BIRTH, SIGN_IN_FAIL_COUNT, UPDATED_AT, UPDATED_BY, PROFILE_IMAGE_ID)
 VALUES ('1995-01-01', '2021-01-01', now(), 'temp', 'jo.sung@yas.com', true, false, null, 'jinok', 'password1', true, 2, now(), 'temp', null);
@@ -37,11 +37,11 @@ INSERT INTO techstacks (CREATED_AT, CREATED_BY, NAME, UPDATED_AT, UPDATED_BY)
 VALUES (now(), 'temp', 'Oracle', now(), 'temp');
 
 
-INSERT INTO teams (CREATED_AT, CREATED_BY, DESCRIPTION, IS_ACTIVE, MAX_USER_COUNT, NAME, UPDATED_AT, UPDATED_BY, OWNER_ID, SCHEDULE_ID, TOPIC)
-VALUES (now(), 'temp', 'Yas Study', true, 5, 'Yas', now(), 'temp', 1, null, 1);
-INSERT INTO teams (CREATED_AT, CREATED_BY, DESCRIPTION, IS_ACTIVE, MAX_USER_COUNT, NAME, UPDATED_AT, UPDATED_BY, OWNER_ID, SCHEDULE_ID, TOPIC)
-VALUES (now(), 'temp', 'Toss Study', true, 10, 'Toss', now(), 'temp', 1, null, 5);
-INSERT INTO teams (CREATED_AT, CREATED_BY, DESCRIPTION, IS_ACTIVE, MAX_USER_COUNT, NAME, UPDATED_AT, UPDATED_BY, OWNER_ID, SCHEDULE_ID, TOPIC)
-VALUES (now(), 'temp', 'Kakao Study', true, 15, 'Kakao', now(), 'temp', 1, null, 2);
-INSERT INTO teams (CREATED_AT, CREATED_BY, DESCRIPTION, IS_ACTIVE, MAX_USER_COUNT, NAME, UPDATED_AT, UPDATED_BY, OWNER_ID, SCHEDULE_ID, TOPIC)
-VALUES (now(), 'temp', 'Naver Study', true, 20, 'Naver', now(), 'temp', 1, null, 6);
+INSERT INTO teams (CREATED_AT, CREATED_BY, DESCRIPTION, STATUS, MAX_MEMBER_COUNT, NAME, UPDATED_AT, UPDATED_BY, OWNER_ID, SCHEDULE_ID, main_techstack_id)
+VALUES (now(), 'temp', 'Yas Study', 'ACTIVE', 5, 'Yas', now(), 'temp', 1, null, 1);
+INSERT INTO teams (CREATED_AT, CREATED_BY, DESCRIPTION, STATUS, MAX_MEMBER_COUNT, NAME, UPDATED_AT, UPDATED_BY, OWNER_ID, SCHEDULE_ID, main_techstack_id)
+VALUES (now(), 'temp', 'Toss Study', 'ACTIVE', 10, 'Toss', now(), 'temp', 1, null, 5);
+INSERT INTO teams (CREATED_AT, CREATED_BY, DESCRIPTION, STATUS, MAX_MEMBER_COUNT, NAME, UPDATED_AT, UPDATED_BY, OWNER_ID, SCHEDULE_ID, main_techstack_id)
+VALUES (now(), 'temp', 'Kakao Study', 'ACTIVE', 15, 'Kakao', now(), 'temp', 1, null, 2);
+INSERT INTO teams (CREATED_AT, CREATED_BY, DESCRIPTION, STATUS, MAX_MEMBER_COUNT, NAME, UPDATED_AT, UPDATED_BY, OWNER_ID, SCHEDULE_ID, main_techstack_id)
+VALUES (now(), 'temp', 'Naver Study', 'ACTIVE', 20, 'Naver', now(), 'temp', 1, null, 6);

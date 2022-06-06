@@ -17,9 +17,9 @@ public class TeamCreateRequest {
     private Long ownerId;
     private String name;
     private String description;
-    private Long maxUserCount;
-    private String topic;
-    private List<String> techStacks;
+    private Long maxMemberCount;
+    private Long mainTechStack;
+    private List<Long> techStackIds;
     private Schedule schedule;
 
     public TeamDto toDto() {
@@ -27,9 +27,9 @@ public class TeamCreateRequest {
                 .ownerId(ownerId)
                 .name(name)
                 .description(description)
-                .maxUserCount(maxUserCount)
-                .topic(topic)
-                .techStacks(Sets.newHashSet(techStacks))
+                .maxMemberCount(maxMemberCount)
+                .mainTechStackId(mainTechStack)
+                .techStackIds(Sets.newHashSet(techStackIds))
                 .build();
     }
 }

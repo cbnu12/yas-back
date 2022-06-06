@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @Builder(access = AccessLevel.PRIVATE)
@@ -21,9 +22,9 @@ public class TeamSearchResponse {
         return TeamSearchResponse.builder()
                 .id(teamDto.getId())
                 .name(teamDto.getName())
-                .maxUserCount(teamDto.getMaxUserCount())
+                .maxUserCount(teamDto.getMaxMemberCount())
                 .currentUserCount(teamDto.getCurrentUserCount())
-                .techStacks(teamDto.getTechStacks())
+                .techStacks(teamDto.getTechStackIds().stream().map(String::valueOf).collect(Collectors.toSet()))
                 .build();
     }
 }

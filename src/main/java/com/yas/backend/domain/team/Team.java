@@ -1,6 +1,9 @@
 package com.yas.backend.domain.team;
 
+import com.google.common.collect.Sets;
 import com.yas.backend.domain.team.dto.TeamDto;
+import com.yas.backend.domain.team.value.TeamInfo;
+import com.yas.backend.domain.team.value.TeamStatus;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,32 +14,26 @@ import java.util.Set;
 @Builder
 public class Team {
 
-    private Long id;
-    private String name;
-    private String description;
-    private Long maxUserCount;
-    private Long currentUserCount;
+    private TeamInfo info;
     private Long ownerId;
-    private String topic;
-    private Set<String> techStacks;
-    private Set<Long> userIds;
-    private Boolean isActive;
-    private LocalDateTime createdAt;
+    private Set<Long> memberIds;
+    private Long mainTechStackId;
+    private Set<Long> techStackIds;
+    private TeamStatus teamStatus;
 
     public static Team create(TeamDto teamDto) {
         return Team.builder()
-                .id(teamDto.getId())
-                .name(teamDto.getName())
-                .maxUserCount(teamDto.getMaxUserCount())
-                .description(teamDto.getDescription())
+                .info(TeamInfo.of(teamDto.getId(), teamDto.getName(), teamDto.getDescription(), teamDto.getMaxMemberCount(), LocalDateTime.now()))
                 .ownerId(teamDto.getOwnerId())
-                .userIds(teamDto.getUserIds())
-                .techStacks(teamDto.getTechStacks())
-                .createdAt(teamDto.getCreatedAt())
+                // TODO: 2022/06/04 please fix me
+                .memberIds(teamDto.getMemberIds() == null ? Sets.newHashSet() : teamDto.getMemberIds())
+                .mainTechStackId(teamDto.getMainTechStackId())
+                .techStackIds(teamDto.getTechStackIds())
+                .teamStatus(TeamStatus.ACTIVE)
                 .build();
     }
 
     public void deactivate() {
-        this.isActive = Boolean.FALSE;
+        teamStatus = TeamStatus.INACTIVE;
     }
 }

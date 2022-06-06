@@ -1,6 +1,7 @@
 package com.yas.backend.common.entity;
 
 import com.google.common.collect.Lists;
+import com.yas.backend.domain.team.value.TeamStatus;
 import lombok.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.annotation.CreatedBy;
@@ -29,8 +30,8 @@ public class TeamEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "max_user_count", nullable = false)
-    private Long maxUserCount;
+    @Column(name = "max_member_count", nullable = false)
+    private Long maxMemberCount;
 
     @Column(name = "description", nullable = false)
     private String description;
@@ -42,8 +43,8 @@ public class TeamEntity {
     private List<JoinEntity> joins;
 
     @ManyToOne
-    @JoinColumn(name = "topic")
-    private TechStackEntity topic;
+    @JoinColumn(name = "main_techstack_id")
+    private TechStackEntity mainTechStack;
 
     @ManyToMany
     @JoinTable(name = "team_techstack")
@@ -53,7 +54,8 @@ public class TeamEntity {
     private ScheduleEntity schedule;
 
     @Column
-    private boolean isActive;
+    @Enumerated(EnumType.STRING)
+    private TeamStatus status;
 
     @CreatedBy
     @Column(updatable = false)
