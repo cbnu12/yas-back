@@ -21,7 +21,7 @@ server:
 spring:
   config:
     activate:
-      on-profile: local-test
+      on-profile: local
   sql:
     init:
       mode: always
@@ -52,11 +52,18 @@ spring:
       max-request-size: 10MB
       enabled: true
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: yas
+    password: 1234
+
+
 ---
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: local-docker
   sql:
     init:
       mode: always
@@ -86,6 +93,12 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
       enabled: true
+
+  rabbitmq:
+    host: local-mq
+    port: 5672
+    username: yas
+    password: 1234
 ---
 
 spring:
@@ -107,6 +120,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://yas-mysql/yas
     username: root
+    password: 1234
+
+  rabbitmq:
+    host: yas-mq
+    port: 5672
+    username: yas
     password: 1234
 
 ---

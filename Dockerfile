@@ -17,7 +17,7 @@ ARG JAR_FILE=./build/libs/backend-0.0.1-SNAPSHOT.jar
 ADD ${JAR_FILE} api.jar
 
 # Add profile env
-ENV PROFILE local
+ENV PROFILE local-docker
 
 # Run the jar file
 ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}", "-Duser.timezone=Asia/Seoul", "-jar", "/api.jar"]
